@@ -1,71 +1,92 @@
-# Lahya Nakashimba Portfolio Showcase
+# Lahya Nakashimba Flet Portfolio Showcase
 
-Computer Programming I personal portfolio website for Lahya Nakashimba. The site is a UNAM-themed academic showcase with a semester project contribution section, reflection, evidence placeholders, MATLAB certificates, learning outcomes, and GitHub Pages deployment support.
+Computer Programming I personal portfolio built with Flet/Python. The app presents a UNAM-themed academic showcase for Lahya Nakashimba, including MiningChecklistApp contributions, reflection, evidence placeholders, MATLAB certificates, learning outcomes, challenges, and GitHub Pages deployment support.
+
+## Create Virtual Environment
+
+```bash
+python -m venv .venv
+.\.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
 ## Run Locally
 
-This is a static website with a small Node build script.
-
 ```bash
-npm install
-npm run build
+python index.py
 ```
 
-Serve the project root or the generated `dist` folder to preview locally:
+The Flet desktop/web runtime starts the portfolio app from `index.py`.
+
+## Build for Web
 
 ```bash
-python -m http.server 8000
+flet build web --yes --no-rich-output --base-url /FletPortfolio/
 ```
 
-Then open `http://localhost:8000`.
+The expected output folder is `build/web`.
 
-## Add New Certificates
-
-1. Add PDF or image certificate files to the `Certificates` folder.
-2. Run:
+On Windows, if the Flet CLI prints Unicode encoding errors, run:
 
 ```bash
-npm run build
+$env:PYTHONUTF8='1'
+$env:PYTHONIOENCODING='utf-8'
+$env:FLET_CLI_NO_RICH_OUTPUT='1'
+flet build web --yes --no-rich-output --base-url /FletPortfolio/
 ```
 
-The build regenerates `assets/certificates-manifest.json`, and the Certificates section updates automatically.
+## Add Certificates
+
+Add PDF or image files to the `Certificates` folder and restart or rebuild the app. The Flet UI scans the folder automatically and uses filenames as display names.
+
+Supported extensions:
+
+- `.pdf`
+- `.png`
+- `.jpg`
+- `.jpeg`
+- `.webp`
 
 ## Replace Screenshot Placeholders
 
-Replace the placeholder PNG files in `assets/screenshots` with real evidence using the same filenames:
+Replace these valid PNG placeholder files with real evidence using the same filenames:
 
-- `github-commit-history-placeholder.png`
-- `github-branch-placeholder.png`
-- `github-pr-placeholder.png`
-- `mining-checklist-app-ui-placeholder.png`
-- `code-contribution-placeholder.png`
+- `assets/screenshots/github-commit-history-placeholder.png`
+- `assets/screenshots/github-branch-placeholder.png`
+- `assets/screenshots/github-pr-placeholder.png`
+- `assets/screenshots/mining-checklist-app-ui-placeholder.png`
+- `assets/screenshots/code-contribution-placeholder.png`
 
-Use accurate screenshots only. Do not fabricate git history, contribution timestamps, or authorship evidence.
+Use accurate screenshots only. Do not fabricate git history, timestamps, or authorship evidence.
 
 ## Deploy to GitHub Pages
 
-The repository includes `.github/workflows/deploy-pages.yml`. After the branch is merged to `main`, GitHub Actions can build the static site and deploy the `dist` folder to GitHub Pages.
+The workflow `.github/workflows/deploy-pages.yml` builds the Flet app and uploads `build/web`.
 
-Manual setup:
+Manual setup after merging to `main`:
 
-1. Push the branch.
-2. Merge the pull request into `main`.
-3. Go to the GitHub repository settings.
-4. Open Pages.
-5. Select GitHub Actions as the source.
-6. Run the deployment workflow if it does not start automatically.
-7. Open the published Pages URL.
+1. Open the GitHub repository.
+2. Go to Settings.
+3. Open Pages.
+4. Select GitHub Actions as the source.
+5. Run or wait for the `Deploy Flet Portfolio to GitHub Pages` workflow.
+6. Open the published site.
 
-## Open a Pull Request
+Expected URL:
 
-From the `development` branch:
+```text
+https://lahyanakashimba.github.io/FletPortfolio/
+```
+
+## Open Pull Request
 
 ```bash
 git push -u origin development
 ```
 
-Then open a pull request from `development` to `main` on GitHub, or use GitHub CLI if authenticated:
+Then open:
 
-```bash
-gh pr create --base main --head development --title "Upgrade portfolio showcase" --body "Adds the Computer Programming I portfolio showcase."
+```text
+https://github.com/lahyanakashimba/FletPortfolio/pull/new/development
 ```

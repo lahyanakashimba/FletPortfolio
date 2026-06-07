@@ -1,34 +1,57 @@
-# GitHub Pages Deployment
+# Flet GitHub Pages Deployment
 
-## Automatic Deployment
+This portfolio is a Flet/Python app. GitHub Pages must deploy the Flet web build output, not the repository root and not a Node/static build.
 
-This repository includes `.github/workflows/deploy-pages.yml`. The workflow runs when changes are pushed to `main` or when it is manually started from the Actions tab.
+## Workflow
 
-The workflow:
+The workflow at `.github/workflows/deploy-pages.yml`:
 
 1. Checks out the repository.
-2. Sets up Node.js.
-3. Runs `npm install`.
-4. Runs `npm run build`.
-5. Uploads the `dist` folder as the Pages artifact.
+2. Sets up Python 3.12.
+3. Installs dependencies from `requirements.txt`.
+4. Runs `flet build web --yes --no-rich-output --base-url /FletPortfolio/`.
+5. Uploads `build/web`.
 6. Deploys the artifact to GitHub Pages.
 
-## Manual Setup Steps
-
-1. Push the `development` branch.
-2. Open and merge a pull request from `development` to `main`.
-3. Open the GitHub repository.
-4. Go to Settings.
-5. Open Pages.
-6. Select GitHub Actions as the deployment source.
-7. Run the workflow from the Actions tab if it does not start automatically.
-8. Open the published GitHub Pages URL shown by the deployment.
-
-## Local Build Check
+## Local Build
 
 ```bash
-npm install
-npm run build
+python -m venv .venv
+.\.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+flet build web --yes --no-rich-output --base-url /FletPortfolio/
 ```
 
-The generated site is placed in `dist`.
+Expected output:
+
+```text
+build/web
+```
+
+## Windows Notes
+
+If the local Flet CLI fails with a Unicode console error, set:
+
+```powershell
+$env:PYTHONUTF8='1'
+$env:PYTHONIOENCODING='utf-8'
+$env:FLET_CLI_NO_RICH_OUTPUT='1'
+```
+
+If Flutter SDK installation takes a long time locally, let GitHub Actions run the build after the branch is merged.
+
+## GitHub Pages Setup
+
+1. Push `development`.
+2. Open and merge the PR into `main`.
+3. Go to repository Settings.
+4. Open Pages.
+5. Select GitHub Actions as the source.
+6. Run the deployment workflow if it does not start automatically.
+
+Expected URL:
+
+```text
+https://lahyanakashimba.github.io/FletPortfolio/
+```

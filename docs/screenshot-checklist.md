@@ -1,4 +1,4 @@
-# Screenshot Checklist
+# Flet Portfolio Screenshot Checklist
 
 Use this checklist to replace the evidence placeholders with accurate screenshots.
 
@@ -23,6 +23,12 @@ Use this checklist to replace the evidence placeholders with accurate screenshot
 - Evidence Gallery
 - Certificates section
 - Footer/contact section
+
+## Flet Build Evidence
+
+- Screenshot of `python index.py` running successfully
+- Screenshot of `build/web` after a successful Flet web build
+- Screenshot of the GitHub Pages deployment workflow after it completes
 
 ## Integrity Reminder
 
