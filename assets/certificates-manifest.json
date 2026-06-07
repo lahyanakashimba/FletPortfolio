@@ -1,0 +1,38 @@
+[
+  {
+    "filename": "Calculations with Vectors and Matrices.pdf",
+    "displayName": "Calculations with Vectors and Matrices",
+    "type": "PDF certificate",
+    "path": "Certificates/Calculations%20with%20Vectors%20and%20Matrices.pdf"
+  },
+  {
+    "filename": "Explore Data with MATLAB Plots.pdf",
+    "displayName": "Explore Data with MATLAB Plots",
+    "type": "PDF certificate",
+    "path": "Certificates/Explore%20Data%20with%20MATLAB%20Plots.pdf"
+  },
+  {
+    "filename": "Machine Learning Onramp.pdf",
+    "displayName": "Machine Learning Onramp",
+    "type": "PDF certificate",
+    "path": "Certificates/Machine%20Learning%20Onramp.pdf"
+  },
+  {
+    "filename": "Make and Manipulate Matrices.pdf",
+    "displayName": "Make and Manipulate Matrices",
+    "type": "PDF certificate",
+    "path": "Certificates/Make%20and%20Manipulate%20Matrices.pdf"
+  },
+  {
+    "filename": "MATLAB Onramp.pdf",
+    "displayName": "MATLAB Onramp",
+    "type": "PDF certificate",
+    "path": "Certificates/MATLAB%20Onramp.pdf"
+  },
+  {
+    "filename": "Simulink Onramp.pdf",
+    "displayName": "Simulink Onramp",
+    "type": "PDF certificate",
+    "path": "Certificates/Simulink%20Onramp.pdf"
+  }
+]
