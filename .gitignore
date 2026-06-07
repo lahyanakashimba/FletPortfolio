@@ -10,6 +10,9 @@ dist/
 .eggs/
 *.egg
 
+# Node
+node_modules/
+
 # Installer logs
 pip-log.txt
 pip-delete-this-directory.txt
@@ -61,4 +64,6 @@ Thumbs.db
 
 # Logs
 *.log
+
+contributions/
 
