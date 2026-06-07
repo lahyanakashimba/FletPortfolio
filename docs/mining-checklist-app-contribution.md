@@ -15,3 +15,7 @@ The portfolio identifies Lahya Nakashimba's contribution honestly. It focuses on
 - Code contribution screenshot that clearly identifies Lahya Nakashimba's work
 
 No fabricated git history, fake timestamps, or misleading authorship evidence should be used.
+
+## Portfolio Display
+
+The Flet portfolio displays MiningChecklistApp as the semester project section. It summarizes the problem solved, key features, technologies used, individual contribution scope, lessons learned, and placeholder evidence that must be replaced with real screenshots after the final project review.
