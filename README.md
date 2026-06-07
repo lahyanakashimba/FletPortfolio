@@ -19,6 +19,14 @@ python index.py
 
 The Flet desktop/web runtime starts the portfolio app from `index.py`.
 
+Do not use `python -m http.server` from the repository root as the main app preview. This is a Flet app, so run it through Flet.
+
+Browser mode:
+
+```bash
+flet run --web index.py
+```
+
 ## Build for Web
 
 ```bash
@@ -62,7 +70,7 @@ Use accurate screenshots only. Do not fabricate git history, timestamps, or auth
 
 ## Deploy to GitHub Pages
 
-The workflow `.github/workflows/deploy-pages.yml` builds the Flet app and uploads `build/web`.
+The workflow `.github/workflows/deploy-pages.yml` installs Python, installs Flutter, builds the Flet app, and uploads `build/web`.
 
 Manual setup after merging to `main`:
 

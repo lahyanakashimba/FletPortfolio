@@ -213,57 +213,65 @@ def build_header(page: ft.Page, logo_src: str) -> ft.Container:
 def build_hero(page: ft.Page, logo_src: str) -> ft.Container:
     return ft.Container(
         key="home",
-        content=ft.ResponsiveRow(
-            [
-                ft.Container(
-                    content=ft.Column(
-                        [
-                            ft.Text("UNIVERSITY OF NAMIBIA | COMPUTER PROGRAMMING I", size=13, color=GOLD, weight=ft.FontWeight.BOLD),
-                            ft.Text("Lahya Nakashimba", size=48, weight=ft.FontWeight.BOLD, color=WHITE),
-                            ft.Text("Computer Programming I Portfolio Showcase", size=24, weight=ft.FontWeight.BOLD, color=GOLD),
-                            ft.Text(
-                                "A Flet-based academic portfolio documenting my MiningChecklistApp contribution, reflection, evidence, certificates, and learning outcomes.",
-                                size=17,
-                                color="#eef5ff",
-                            ),
-                            ft.Row(
-                                [
-                                    ft.Button("View Contributions", icon=ft.Icons.WORK, bgcolor=GOLD, color=NAVY_DARK, on_click=lambda _: page.scroll_to(key="project", duration=500)),
-                                    ft.Button("View Certificates", icon=ft.Icons.WORKSPACE_PREMIUM, bgcolor=WHITE, color=NAVY, on_click=lambda _: page.scroll_to(key="certificates", duration=500)),
-                                    ft.Button("View Video", icon=ft.Icons.PLAY_CIRCLE, bgcolor="#ffffff22", color=WHITE, on_click=lambda _: page.scroll_to(key="video", duration=500)),
-                                ],
-                                wrap=True,
-                                spacing=10,
-                            ),
-                        ],
-                        spacing=14,
+        content=ft.Container(
+            content=ft.ResponsiveRow(
+                [
+                    ft.Container(
+                        content=ft.Column(
+                            [
+                                ft.Text("UNIVERSITY OF NAMIBIA | COMPUTER PROGRAMMING I", size=13, color=GOLD, weight=ft.FontWeight.BOLD),
+                                ft.Text("Lahya Nakashimba", size=46, weight=ft.FontWeight.BOLD, color=WHITE),
+                                ft.Text("Computer Programming I Portfolio Showcase", size=23, weight=ft.FontWeight.BOLD, color=GOLD),
+                                ft.Text(
+                                    "A Flet-based academic portfolio documenting my MiningChecklistApp contribution, reflection, evidence, certificates, and learning outcomes.",
+                                    size=17,
+                                    color="#eef5ff",
+                                ),
+                                ft.Row(
+                                    [
+                                        ft.Button("View Contributions", icon=ft.Icons.WORK, bgcolor=GOLD, color=NAVY_DARK, on_click=lambda _: page.scroll_to(key="project", duration=500)),
+                                        ft.Button("View Certificates", icon=ft.Icons.WORKSPACE_PREMIUM, bgcolor=WHITE, color=NAVY, on_click=lambda _: page.scroll_to(key="certificates", duration=500)),
+                                        ft.Button("View Video", icon=ft.Icons.PLAY_CIRCLE, bgcolor="#ffffff22", color=WHITE, on_click=lambda _: page.scroll_to(key="video", duration=500)),
+                                    ],
+                                    wrap=True,
+                                    spacing=10,
+                                ),
+                            ],
+                            spacing=14,
+                            tight=True,
+                        ),
+                        col={"xs": 12, "md": 7},
                     ),
-                    col={"xs": 12, "md": 7},
-                ),
-                ft.Container(
-                    content=ft.Column(
-                        [
-                            ft.Image(src=logo_src, height=110, fit=ft.BoxFit.CONTAIN, semantics_label="UNAM logo"),
-                            ft.Container(content=ft.Text("Project: MiningChecklistApp", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=14, border_radius=8),
-                            ft.Container(content=ft.Text("Theme: UNAM navy, gold, and white", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=14, border_radius=8),
-                            ft.Container(content=ft.Text("Evidence: real placeholders ready for replacement", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=14, border_radius=8),
-                        ],
-                        spacing=12,
-                        horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                    ft.Container(
+                        content=ft.Column(
+                            [
+                                ft.Image(src=logo_src, height=96, fit=ft.BoxFit.CONTAIN, semantics_label="UNAM logo"),
+                                ft.Container(content=ft.Text("Project: MiningChecklistApp", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=14, border_radius=8),
+                                ft.Container(content=ft.Text("Theme: UNAM navy, gold, and white", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=14, border_radius=8),
+                                ft.Container(content=ft.Text("Evidence: real placeholders ready for replacement", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=14, border_radius=8),
+                            ],
+                            spacing=12,
+                            tight=True,
+                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+                        ),
+                        bgcolor="#ffffff22",
+                        border=border_all(1, "#ffffff55"),
+                        border_radius=8,
+                        padding=20,
+                        col={"xs": 12, "md": 5},
                     ),
-                    bgcolor="#ffffff22",
-                    border=border_all(1, "#ffffff55"),
-                    border_radius=8,
-                    padding=24,
-                    col={"xs": 12, "md": 5},
-                ),
-            ],
-            spacing=24,
-            run_spacing=24,
-            vertical_alignment=ft.CrossAxisAlignment.CENTER,
+                ],
+                spacing=22,
+                run_spacing=22,
+                vertical_alignment=ft.CrossAxisAlignment.START,
+                            ),
+            gradient=ft.LinearGradient(begin=ft.Alignment(-1, -1), end=ft.Alignment(1, 1), colors=[NAVY_DARK, NAVY, BLUE]),
+            border_radius=8,
+            padding=ft.Padding(24, 28, 24, 28),
+            shadow=ft.BoxShadow(blur_radius=24, color="#1f3a5f24", offset=ft.Offset(0, 10)),
         ),
-        gradient=ft.LinearGradient(begin=ft.Alignment(-1, -1), end=ft.Alignment(1, 1), colors=[NAVY_DARK, NAVY, BLUE]),
-        padding=ft.Padding(24, 54, 24, 54),
+        bgcolor=SURFACE,
+        padding=ft.Padding(16, 16, 16, 8),
     )
 
 
@@ -302,7 +310,7 @@ def build_about() -> ft.Container:
             spacing=18,
             run_spacing=18,
         ),
-        padding=ft.Padding(24, 48, 24, 48),
+        padding=ft.Padding(24, 32, 24, 32),
     )
 
 
@@ -316,7 +324,7 @@ def build_project() -> ft.Container:
     return ft.Container(
         key="project",
         bgcolor=SURFACE,
-        padding=ft.Padding(24, 48, 24, 48),
+        padding=ft.Padding(24, 32, 24, 32),
         content=ft.Column(
             [
                 section_title(
@@ -366,7 +374,7 @@ def build_project() -> ft.Container:
 def build_reflection() -> ft.Container:
     return ft.Container(
         key="reflection",
-        padding=ft.Padding(24, 48, 24, 48),
+        padding=ft.Padding(24, 32, 24, 32),
         content=ft.Column(
             [
                 section_title("Individual Contribution Reflection", "My Semester Reflection"),
@@ -448,7 +456,7 @@ def build_evidence() -> ft.Container:
     return ft.Container(
         key="evidence",
         bgcolor=SURFACE,
-        padding=ft.Padding(24, 48, 24, 48),
+        padding=ft.Padding(24, 32, 24, 32),
         content=ft.Column(
             [
                 section_title(
@@ -483,7 +491,7 @@ def build_certificates(page: ft.Page) -> ft.Container:
 
     return ft.Container(
         key="certificates",
-        padding=ft.Padding(24, 48, 24, 48),
+        padding=ft.Padding(24, 32, 24, 32),
         content=ft.Column(
             [
                 section_title("Certificates", "MATLAB Learning Evidence", "Certificate cards are scanned automatically from the Certificates folder when the Flet app starts."),
@@ -506,7 +514,7 @@ def build_learning_and_challenges() -> ft.Container:
     return ft.Container(
         key="learning",
         bgcolor=SURFACE,
-        padding=ft.Padding(24, 48, 24, 48),
+        padding=ft.Padding(24, 32, 24, 32),
         content=ft.Column(
             [
                 section_title("Skills and Learning Outcomes", "What I Learned"),
@@ -574,15 +582,26 @@ def main(page: ft.Page):
     logo_src = ensure_logo_placeholder()
 
     page.add(
-        build_header(page, logo_src),
-        build_hero(page, logo_src),
-        build_about(),
-        build_project(),
-        build_reflection(),
-        build_evidence(),
-        build_certificates(page),
-        build_learning_and_challenges(),
-        build_footer(),
+        ft.Container(
+            content=ft.Column(
+                [
+                    build_header(page, logo_src),
+                    build_hero(page, logo_src),
+                    build_about(),
+                    build_project(),
+                    build_reflection(),
+                    build_evidence(),
+                    build_certificates(page),
+                    build_learning_and_challenges(),
+                    build_footer(),
+                ],
+                spacing=0,
+                tight=True,
+                horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+            ),
+            bgcolor=WHITE,
+            alignment=ft.Alignment(0, -1),
+        )
     )
 
 

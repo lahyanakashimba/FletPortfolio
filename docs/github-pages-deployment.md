@@ -8,10 +8,12 @@ The workflow at `.github/workflows/deploy-pages.yml`:
 
 1. Checks out the repository.
 2. Sets up Python 3.12.
-3. Installs dependencies from `requirements.txt`.
-4. Runs `flet build web --yes --no-rich-output --base-url /FletPortfolio/`.
-5. Uploads `build/web`.
-6. Deploys the artifact to GitHub Pages.
+3. Installs Flutter through `subosito/flutter-action`.
+4. Installs dependencies from `requirements.txt`.
+5. Runs `flet build web --yes --no-rich-output --base-url /FletPortfolio/`.
+6. Verifies that `build/web` exists.
+7. Uploads `build/web`.
+8. Deploys the artifact to GitHub Pages.
 
 ## Local Build
 
@@ -40,6 +42,21 @@ $env:FLET_CLI_NO_RICH_OUTPUT='1'
 ```
 
 If Flutter SDK installation takes a long time locally, let GitHub Actions run the build after the branch is merged.
+
+## Local App Preview
+
+Do not use `python -m http.server` from the repository root as the main app. Use:
+
+```powershell
+.\.venv\Scripts\Activate.ps1
+python index.py
+```
+
+Or run browser mode:
+
+```powershell
+flet run --web index.py
+```
 
 ## GitHub Pages Setup
 
