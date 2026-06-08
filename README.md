@@ -79,7 +79,7 @@ Manual setup after merging to `main`:
 1. Open the GitHub repository.
 2. Go to Settings.
 3. Open Pages.
-4. Select GitHub Actions as the source.
+4. Select GitHub Actions as the source. Do not choose "Deploy from a branch" with `main / root`, because GitHub Pages must publish the generated Flet `build/web` files, not raw Python files.
 5. Run or wait for the `Deploy Flet Portfolio to GitHub Pages` workflow.
 6. Open the published site.
 

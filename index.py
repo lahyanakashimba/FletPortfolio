@@ -11,13 +11,15 @@ LOGOS_DIR = ROOT / "assets" / "logos"
 NAVY = "#002F6C"
 NAVY_DARK = "#001D43"
 BLUE = "#0F5EA8"
-GOLD = "#F2C230"
+GOLD = "#BFA046"
+GOLD_DARK = "#9A7A20"
 WHITE = "#FFFFFF"
-PAGE_BG = "#F8FAFC"
-SOFT_BLUE = "#EEF5FF"
-INK = "#172033"
-MUTED = "#5B6474"
-LINE = "#DCE3EF"
+CREAM = "#FFFDF5"
+PAGE_BG = "#F5F7FB"
+SOFT_BLUE = "#EFF6FF"
+INK = "#111827"
+MUTED = "#4B5563"
+LINE = "#E5E7EB"
 
 
 def ensure_logo() -> str:
@@ -76,9 +78,8 @@ def section(content: list[ft.Control], key: str | None = None, bgcolor: str = PA
     return ft.Container(
         key=key,
         bgcolor=bgcolor,
-        padding=ft.Padding(20, 34, 20, 34),
+        padding=ft.Padding(22, 42, 22, 42),
         content=ft.Container(
-            width=1160,
             content=ft.Column(content, spacing=18, tight=True),
         ),
         alignment=ft.Alignment(0, -1),
@@ -88,7 +89,7 @@ def section(content: list[ft.Control], key: str | None = None, bgcolor: str = PA
 def title_block(eyebrow: str, title: str, subtitle: str | None = None) -> ft.Column:
     controls: list[ft.Control] = [
         ft.Text(eyebrow.upper(), size=12, weight=ft.FontWeight.BOLD, color=BLUE),
-        ft.Text(title, size=32, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
+        ft.Text(title, size=30, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
     ]
     if subtitle:
         controls.append(ft.Text(subtitle, size=16, color=MUTED))
@@ -98,8 +99,8 @@ def title_block(eyebrow: str, title: str, subtitle: str | None = None) -> ft.Col
 def pill(text: str) -> ft.Container:
     return ft.Container(
         content=ft.Text(text, size=13, weight=ft.FontWeight.BOLD, color=NAVY),
-        bgcolor=SOFT_BLUE,
-        border=border_all(1, "#CBDDF4"),
+        bgcolor="#F8FBFF",
+        border=border_all(1, "#D7E3F5"),
         border_radius=24,
         padding=ft.Padding(12, 7, 12, 7),
     )
@@ -121,14 +122,14 @@ def bullet_list(items: list[str]) -> ft.Column:
     return ft.Column(rows, spacing=8, tight=True)
 
 
-def simple_card(title: str, body: str, icon=ft.Icons.DESCRIPTION) -> ft.Container:
+def simple_card(title: str, body: str, icon=ft.Icons.DESCRIPTION, col=None) -> ft.Container:
     return ft.Container(
-        width=350,
+        col=col or {"xs": 12, "sm": 12, "md": 6, "lg": 4},
         bgcolor=WHITE,
         border=border_all(1, LINE),
         border_radius=8,
         padding=18,
-        shadow=ft.BoxShadow(blur_radius=18, color="#1F3A5F14", offset=ft.Offset(0, 8)),
+        shadow=ft.BoxShadow(blur_radius=18, color="#1F3A5F10", offset=ft.Offset(0, 8)),
         content=ft.Column(
             [
                 ft.Icon(icon, color=GOLD, size=28),
@@ -142,22 +143,22 @@ def simple_card(title: str, body: str, icon=ft.Icons.DESCRIPTION) -> ft.Containe
 
 
 def card_row(cards: list[ft.Control]) -> ft.Row:
-    return ft.Row(cards, wrap=True, spacing=14, run_spacing=14, alignment=ft.MainAxisAlignment.CENTER)
+    return ft.ResponsiveRow(cards, spacing=16, run_spacing=16)
 
 
 def evidence_card(filename: str, title: str, caption: str) -> ft.Container:
     return ft.Container(
-        width=350,
+        col={"xs": 12, "sm": 12, "md": 6, "lg": 4},
         bgcolor=WHITE,
         border=border_all(1, LINE),
         border_radius=8,
         padding=14,
-        shadow=ft.BoxShadow(blur_radius=16, color="#1F3A5F12", offset=ft.Offset(0, 7)),
+        shadow=ft.BoxShadow(blur_radius=16, color="#1F3A5F0F", offset=ft.Offset(0, 7)),
         content=ft.Column(
             [
                 ft.Image(
                     src=f"assets/screenshots/{filename}",
-                    height=190,
+                    height=180,
                     fit=ft.BoxFit.COVER,
                     border_radius=8,
                     semantics_label=title,
@@ -186,12 +187,12 @@ def certificate_card(path: Path, page: ft.Page) -> ft.Container:
         page.launch_url(href)
 
     return ft.Container(
-        width=350,
+        col={"xs": 12, "sm": 12, "md": 6, "lg": 4},
         bgcolor=WHITE,
         border=border_all(1, LINE),
         border_radius=8,
         padding=16,
-        shadow=ft.BoxShadow(blur_radius=14, color="#1F3A5F10", offset=ft.Offset(0, 6)),
+        shadow=ft.BoxShadow(blur_radius=14, color="#1F3A5F0D", offset=ft.Offset(0, 6)),
         content=ft.Column(
             [
                 ft.Row(
@@ -202,7 +203,7 @@ def certificate_card(path: Path, page: ft.Page) -> ft.Container:
                             bgcolor=SOFT_BLUE,
                             border_radius=8,
                             alignment=ft.Alignment(0, 0),
-                            content=ft.Icon(ft.Icons.WORKSPACE_PREMIUM, color=GOLD, size=28),
+                            content=ft.Icon(ft.Icons.WORKSPACE_PREMIUM, color=GOLD_DARK, size=28),
                         ),
                         ft.Column(
                             [
@@ -219,7 +220,7 @@ def certificate_card(path: Path, page: ft.Page) -> ft.Container:
                 ft.Row(
                     [
                         ft.Button("Open", icon=ft.Icons.OPEN_IN_NEW, bgcolor=NAVY, color=WHITE, on_click=open_file),
-                        ft.Button("Download/Open", icon=ft.Icons.DOWNLOAD, bgcolor=GOLD, color=NAVY_DARK, on_click=open_file),
+                        ft.Button("Download/Open", icon=ft.Icons.DOWNLOAD, bgcolor=CREAM, color=NAVY, on_click=open_file),
                     ],
                     wrap=True,
                     spacing=8,
@@ -236,13 +237,13 @@ def navbar(page: ft.Page, logo_src: str) -> ft.Container:
         key="top",
         bgcolor=WHITE,
         border=ft.Border(bottom=ft.BorderSide(1, LINE)),
-        padding=ft.Padding(20, 12, 20, 12),
+        padding=ft.Padding(24, 13, 24, 13),
         content=ft.Row(
             [
                 ft.Row(
                     [
                         ft.Image(src=logo_src, width=42, height=42, fit=ft.BoxFit.CONTAIN, semantics_label="UNAM logo"),
-                        ft.Text("Lahya Nakashimba", size=18, weight=ft.FontWeight.BOLD, color=NAVY),
+                        ft.Text("Lahya Nakashimba", size=18, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
                     ],
                     spacing=10,
                 ),
@@ -269,17 +270,17 @@ def navbar(page: ft.Page, logo_src: str) -> ft.Container:
 
 def hero(page: ft.Page, logo_src: str) -> ft.Container:
     visual = ft.Container(
-        width=330,
-        bgcolor="#FFFFFF22",
-        border=border_all(1, "#FFFFFF55"),
+        col={"xs": 12, "sm": 12, "md": 5},
+        bgcolor=WHITE,
+        border=border_all(1, "#E6EDF7"),
         border_radius=8,
         padding=18,
         content=ft.Column(
             [
                 ft.Image(src=logo_src, height=88, fit=ft.BoxFit.CONTAIN, semantics_label="UNAM logo"),
-                ft.Container(content=ft.Text("MiningChecklistApp Contribution Portfolio", color=INK, weight=ft.FontWeight.BOLD), bgcolor=WHITE, padding=12, border_radius=8),
-                ft.Container(content=ft.Text("Certificates, reflection, evidence, and learning outcomes", color=INK), bgcolor=WHITE, padding=12, border_radius=8),
-                ft.Container(content=ft.Text("Prepared for Computer Programming I", color=INK), bgcolor=WHITE, padding=12, border_radius=8),
+                ft.Container(content=ft.Text("MiningChecklistApp Contribution Portfolio", color=NAVY, weight=ft.FontWeight.BOLD), bgcolor=SOFT_BLUE, padding=12, border_radius=8),
+                ft.Container(content=ft.Text("Reflection, evidence, certificates, and learning outcomes", color=INK), bgcolor=CREAM, padding=12, border_radius=8),
+                ft.Container(content=ft.Text("Prepared for Computer Programming I", color=INK), bgcolor="#F9FAFB", padding=12, border_radius=8),
             ],
             spacing=10,
             tight=True,
@@ -290,31 +291,31 @@ def hero(page: ft.Page, logo_src: str) -> ft.Container:
     return section(
         [
             ft.Container(
-                bgcolor=NAVY,
-                gradient=ft.LinearGradient(begin=ft.Alignment(-1, -1), end=ft.Alignment(1, 1), colors=[NAVY_DARK, NAVY, BLUE]),
+                bgcolor=CREAM,
                 border_radius=8,
-                padding=ft.Padding(24, 30, 24, 30),
-                shadow=ft.BoxShadow(blur_radius=24, color="#1F3A5F24", offset=ft.Offset(0, 10)),
-                content=ft.Row(
+                border=border_all(1, "#E8DDBF"),
+                padding=ft.Padding(24, 32, 24, 32),
+                shadow=ft.BoxShadow(blur_radius=24, color="#1F3A5F18", offset=ft.Offset(0, 10)),
+                content=ft.ResponsiveRow(
                     [
                         ft.Container(
-                            width=680,
+                            col={"xs": 12, "sm": 12, "md": 7},
                             content=ft.Column(
                                 [
-                                    ft.Text("UNIVERSITY OF NAMIBIA | COMPUTER PROGRAMMING I", size=13, color=GOLD, weight=ft.FontWeight.BOLD),
-                                    ft.Text("Lahya Nakashimba", size=46, weight=ft.FontWeight.BOLD, color=WHITE),
-                                    ft.Text("Computer Programming I Portfolio Showcase", size=23, weight=ft.FontWeight.BOLD, color=GOLD),
-                                    ft.Text("MiningChecklistApp Contribution Portfolio", size=18, weight=ft.FontWeight.BOLD, color="#EAF2FF"),
+                                    ft.Text("UNIVERSITY OF NAMIBIA | COMPUTER PROGRAMMING I", size=13, color=GOLD_DARK, weight=ft.FontWeight.BOLD),
+                                    ft.Text("Lahya Nakashimba", size=44, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
+                                    ft.Text("Computer Programming I Portfolio Showcase", size=23, weight=ft.FontWeight.BOLD, color=NAVY),
+                                    ft.Text("MiningChecklistApp Contribution Portfolio", size=18, weight=ft.FontWeight.BOLD, color=GOLD_DARK),
                                     ft.Text(
                                         "A professional Flet portfolio presenting my semester project contribution, reflection, learning evidence, challenges, certificates, and honest contribution placeholders.",
                                         size=16,
-                                        color="#EAF2FF",
+                                        color=MUTED,
                                     ),
                                     ft.Row(
                                         [
-                                            ft.Button("View Contribution", icon=ft.Icons.WORK, bgcolor=GOLD, color=NAVY_DARK, on_click=lambda _: page.scroll_to(key="contribution", duration=450)),
+                                            ft.Button("View Contribution", icon=ft.Icons.WORK, bgcolor=NAVY, color=WHITE, on_click=lambda _: page.scroll_to(key="contribution", duration=450)),
                                             ft.Button("View Certificates", icon=ft.Icons.WORKSPACE_PREMIUM, bgcolor=WHITE, color=NAVY, on_click=lambda _: page.scroll_to(key="certificates", duration=450)),
-                                            ft.Button("View Evidence", icon=ft.Icons.IMAGE, bgcolor="#FFFFFF22", color=WHITE, on_click=lambda _: page.scroll_to(key="evidence", duration=450)),
+                                            ft.Button("View Evidence", icon=ft.Icons.IMAGE, bgcolor="#F3EBD1", color=NAVY_DARK, on_click=lambda _: page.scroll_to(key="evidence", duration=450)),
                                         ],
                                         wrap=True,
                                         spacing=10,
@@ -326,7 +327,6 @@ def hero(page: ft.Page, logo_src: str) -> ft.Container:
                         ),
                         visual,
                     ],
-                    wrap=True,
                     spacing=28,
                     run_spacing=18,
                     vertical_alignment=ft.CrossAxisAlignment.START,
@@ -342,10 +342,10 @@ def about_section() -> ft.Container:
     return section(
         [
             title_block("About Me", "Student Profile", "A clear academic portfolio for Computer Programming I."),
-            ft.Row(
+            ft.ResponsiveRow(
                 [
                     ft.Container(
-                        width=700,
+                        col={"xs": 12, "sm": 12, "md": 7},
                         content=ft.Column(
                             [
                                 ft.Text(
@@ -367,9 +367,9 @@ def about_section() -> ft.Container:
                         "Academic Context",
                         "Course: Computer Programming I\nInstitution: University of Namibia\nPortfolio year: 2026",
                         ft.Icons.SCHOOL,
+                        col={"xs": 12, "sm": 12, "md": 5},
                     ),
                 ],
-                wrap=True,
                 spacing=18,
                 run_spacing=18,
                 vertical_alignment=ft.CrossAxisAlignment.START,
@@ -401,10 +401,10 @@ def contribution_section() -> ft.Container:
     return section(
         [
             title_block("Individual Contribution", "Contribution Reflection", "Written in an honest student style without overclaiming."),
-            ft.Row(
+            ft.ResponsiveRow(
                 [
                     ft.Container(
-                        width=720,
+                        col={"xs": 12, "sm": 12, "md": 8},
                         bgcolor=WHITE,
                         border=border_all(1, LINE),
                         border_radius=8,
@@ -436,7 +436,7 @@ def contribution_section() -> ft.Container:
                     ),
                     ft.Container(
                         key="video",
-                        width=350,
+                        col={"xs": 12, "sm": 12, "md": 4},
                         height=220,
                         bgcolor=NAVY,
                         border_radius=8,
@@ -454,7 +454,6 @@ def contribution_section() -> ft.Container:
                         ),
                     ),
                 ],
-                wrap=True,
                 spacing=18,
                 run_spacing=18,
                 vertical_alignment=ft.CrossAxisAlignment.START,
@@ -543,27 +542,24 @@ def footer() -> ft.Container:
         bgcolor=NAVY_DARK,
         padding=ft.Padding(20, 34, 20, 34),
         alignment=ft.Alignment(0, -1),
-        content=ft.Container(
-            width=1160,
-            content=ft.Row(
-                [
-                    ft.Column(
-                        [
-                            ft.Text("Contact", size=26, weight=ft.FontWeight.BOLD, color=GOLD),
-                            ft.Text("Email: lahyanakashimba038@gmail.com", color=WHITE, selectable=True),
-                            ft.Text("GitHub: github.com/lahyanakashimba/FletPortfolio", color=WHITE, selectable=True),
-                        ],
-                        spacing=7,
-                        tight=True,
-                    ),
-                    ft.Text("Computer Programming I Portfolio Showcase 2026", color="#EAF2FF"),
-                ],
-                wrap=True,
-                spacing=24,
-                run_spacing=16,
-                alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
-                vertical_alignment=ft.CrossAxisAlignment.CENTER,
-            ),
+        content=ft.Row(
+            [
+                ft.Column(
+                    [
+                        ft.Text("Contact", size=26, weight=ft.FontWeight.BOLD, color=GOLD),
+                        ft.Text("Email: lahyanakashimba038@gmail.com", color=WHITE, selectable=True),
+                        ft.Text("GitHub: github.com/lahyanakashimba/FletPortfolio", color=WHITE, selectable=True),
+                    ],
+                    spacing=7,
+                    tight=True,
+                ),
+                ft.Text("Computer Programming I Portfolio Showcase 2026", color="#EAF2FF"),
+            ],
+            wrap=True,
+            spacing=24,
+            run_spacing=16,
+            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            vertical_alignment=ft.CrossAxisAlignment.CENTER,
         ),
     )
 

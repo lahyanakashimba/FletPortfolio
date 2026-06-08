@@ -2,6 +2,8 @@
 
 This portfolio is a Flet/Python app. GitHub Pages must deploy the Flet web build output, not the repository root and not a Node/static build.
 
+Use GitHub Actions as the Pages source. Do not use "Deploy from a branch" with `main / root`, because raw Python files are not a deployable GitHub Pages website.
+
 ## Workflow
 
 The workflow at `.github/workflows/deploy-pages.yml`:
