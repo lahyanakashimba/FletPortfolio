@@ -37,5 +37,5 @@ flet run --web index.py
 For GitHub Pages, rebuild with:
 
 ```powershell
-flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
+flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 ```

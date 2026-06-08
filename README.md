@@ -53,7 +53,7 @@ python index.py
 GitHub Pages cannot run Python directly. The Flet app is built into static files under `build/web`, and GitHub Pages serves those generated files.
 
 ```powershell
-flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
+flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 ```
 
 ## Deployment

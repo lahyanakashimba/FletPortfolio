@@ -39,7 +39,7 @@ jobs:
 
       - name: Build Flet web app
         run: |
-          flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
+          flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 
       - name: Verify build output
         run: |

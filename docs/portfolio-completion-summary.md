@@ -33,7 +33,7 @@ No fake timestamps, backdated commits, or fabricated contribution evidence were 
 
 - Local run command: `python index.py`
 - Browser run command: `flet run --web index.py`
-- Web build command: `flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn`
+- Web build command: `flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn`
 - Expected web artifact: `build/web`
 - GitHub Pages workflow: `.github/workflows/deploy-pages.yml`
 
