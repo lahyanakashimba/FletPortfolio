@@ -2,6 +2,8 @@
 
 Computer Programming I personal portfolio built with Flet/Python. The app presents a UNAM-themed academic showcase for Lahya Nakashimba, including MiningChecklistApp contributions, reflection, evidence placeholders, MATLAB certificates, learning outcomes, challenges, and GitHub Pages deployment support.
 
+The portfolio is designed as a responsive Flet website with a custom navbar, navy/gold hero card, compact evidence gallery, and certificate icon cards. It should be previewed with Flet, not with a static file server.
+
 ## Create Virtual Environment
 
 ```bash

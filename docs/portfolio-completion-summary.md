@@ -4,7 +4,7 @@
 
 The portfolio has been restored as a Flet/Python application. The mistaken Node/static-site direction has been removed from the tracked project files, and `index.py` is again the real app entry point.
 
-The layout was corrected so the header is followed immediately by a compact UNAM-themed hero card. The app now uses a single top-aligned main Flet column instead of adding all large sections directly to the page as separate top-level controls.
+The layout was redesigned as a Flet website. The previous layout still depended heavily on `ResponsiveRow` controls and broad grey section surfaces near the top of the page. Those controls were replaced with a single scrollable website column, a compact navbar, a bounded hero card, wrapped card rows, compact evidence images, and certificate icon cards.
 
 ## Implemented Flet Sections
 
@@ -18,6 +18,12 @@ The layout was corrected so the header is followed immediately by a compact UNAM
 - Skills / Learning Outcomes
 - Challenges and Solutions
 - Footer with email, GitHub repository text, and 2026 showcase note
+
+## Layout QA
+
+- Browser mode command: `flet run --web index.py`
+- Desktop mode command: `python index.py`
+- Manual QA note: `docs/qa/manual-website-layout-check.md`
 
 ## Integrity
 

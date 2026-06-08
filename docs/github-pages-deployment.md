@@ -15,6 +15,8 @@ The workflow at `.github/workflows/deploy-pages.yml`:
 7. Uploads `build/web`.
 8. Deploys the artifact to GitHub Pages.
 
+The workflow installs Flutter explicitly because local Flet web builds require Flutter SDK support.
+
 ## Local Build
 
 ```bash
