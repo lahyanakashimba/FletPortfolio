@@ -28,24 +28,7 @@ def log_startup(message: str):
 
 
 def ensure_logo() -> str:
-    LOGOS_DIR.mkdir(parents=True, exist_ok=True)
-    logos = sorted(LOGOS_DIR.glob("unam-logo.*"))
-    if logos:
-        return f"logos/{logos[0].name}"
-
-    fallback_logo = LOGOS_DIR / "unam-logo-fallback.svg"
-    if not fallback_logo.exists():
-        fallback_logo.write_text(
-            """<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
-  <rect width="320" height="320" rx="160" fill="#002f6c"/>
-  <circle cx="160" cy="160" r="118" fill="none" stroke="#f2c230" stroke-width="12"/>
-  <text x="160" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="58" font-weight="700" fill="#ffffff">UNAM</text>
-  <text x="160" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#f2c230">Student Portfolio</text>
-</svg>
-""",
-            encoding="utf-8",
-        )
-    return "logos/unam-logo-fallback.svg"
+    return "logos/unam-logo.jpeg"
 
 
 def border_all(width: int | float, color: str) -> ft.Border:

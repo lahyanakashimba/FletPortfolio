@@ -26,6 +26,10 @@ def copy_brand_assets() -> None:
     shutil.copyfile(ICON_SOURCE, BUILD_WEB / "favicon.png")
     shutil.copyfile(ICON_SOURCE, BUILD_WEB / "brand-icon.png")
 
+    logos_dir = BUILD_WEB / "logos"
+    logos_dir.mkdir(exist_ok=True)
+    shutil.copyfile(LOGO_SOURCE, logos_dir / "unam-logo.jpeg")
+
     icons_dir = BUILD_WEB / "icons"
     icons_dir.mkdir(exist_ok=True)
     for name in ("Icon-192.png", "Icon-maskable-192.png", "apple-touch-icon-192.png"):
@@ -150,6 +154,9 @@ def branded_loader_markup() -> str:
   </div>
   <script>
     (function () {
+      var shownAt = Date.now();
+      var minDisplayMs = 1400;
+
       function hidePortfolioLoader() {
         var loader = document.getElementById("portfolio-loading");
         if (!loader) {
@@ -166,7 +173,12 @@ def branded_loader_markup() -> str:
       }
 
       window.addEventListener("flutter-first-frame", function () {
-        window.setTimeout(hidePortfolioLoader, 180);
+        var remaining = Math.max(0, minDisplayMs - (Date.now() - shownAt));
+        window.setTimeout(function () {
+          window.requestAnimationFrame(function () {
+            window.requestAnimationFrame(hidePortfolioLoader);
+          });
+        }, remaining);
       });
     })();
   </script>"""
@@ -184,6 +196,14 @@ def patch_index() -> None:
         '<link rel="apple-touch-icon" href="icons/apple-touch-icon-192.png">',
         '<link rel="apple-touch-icon" href="icons/Icon-192.png?v=unam">',
     )
+    html = html.replace(
+        'canvasKitBaseUrl: "/canvaskit/"',
+        'canvasKitBaseUrl: "/FletPortfolio/canvaskit/"',
+    )
+    html = html.replace(
+        'pyodideUrl: "/pyodide/pyodide.js"',
+        'pyodideUrl: "/FletPortfolio/pyodide/pyodide.js"',
+    )
 
     marker = "<body>"
     loader = branded_loader_markup()
@@ -193,12 +213,26 @@ def patch_index() -> None:
     index_path.write_text(html, encoding="utf-8")
 
 
+def patch_flutter_bootstrap() -> None:
+    bootstrap_path = BUILD_WEB / "flutter_bootstrap.js"
+    if not bootstrap_path.exists():
+        return
+
+    js = bootstrap_path.read_text(encoding="utf-8")
+    marker = "    flutterConfig.renderer = flet.webRenderer;\n"
+    patch = marker + '    flutterConfig.canvasKitVariant = "full";\n'
+    if marker in js and patch not in js:
+        js = js.replace(marker, patch, 1)
+    bootstrap_path.write_text(js, encoding="utf-8")
+
+
 def main() -> None:
     if not BUILD_WEB.exists():
         raise FileNotFoundError(f"Missing Flet build output: {BUILD_WEB}")
     copy_brand_assets()
     update_manifest()
     patch_index()
+    patch_flutter_bootstrap()
 
 
 if __name__ == "__main__":
