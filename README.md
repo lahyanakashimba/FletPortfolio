@@ -32,7 +32,7 @@ flet run --web index.py
 ## Build for Web
 
 ```bash
-flet build web --yes --no-rich-output --base-url /FletPortfolio/
+flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 ```
 
 The expected output folder is `build/web`.
@@ -43,7 +43,7 @@ On Windows, if the Flet CLI prints Unicode encoding errors, run:
 $env:PYTHONUTF8='1'
 $env:PYTHONIOENCODING='utf-8'
 $env:FLET_CLI_NO_RICH_OUTPUT='1'
-flet build web --yes --no-rich-output --base-url /FletPortfolio/
+flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 ```
 
 ## Add Certificates

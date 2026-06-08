@@ -12,7 +12,7 @@ The workflow at `.github/workflows/deploy-pages.yml`:
 2. Sets up Python 3.12.
 3. Installs Flutter through `subosito/flutter-action`.
 4. Installs dependencies from `requirements.txt`.
-5. Runs `flet build web --yes --no-rich-output --base-url /FletPortfolio/`.
+5. Runs `flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn`.
 6. Verifies that `build/web` exists.
 7. Uploads `build/web`.
 8. Deploys the artifact to GitHub Pages.
@@ -26,7 +26,7 @@ python -m venv .venv
 .\.venv\Scripts\activate
 python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
-flet build web --yes --no-rich-output --base-url /FletPortfolio/
+flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 ```
 
 Expected output:

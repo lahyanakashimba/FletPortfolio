@@ -42,7 +42,7 @@ jobs:
           PYTHONUTF8: "1"
           PYTHONIOENCODING: utf-8
           FLET_CLI_NO_RICH_OUTPUT: "1"
-        run: flet build web --yes --no-rich-output --base-url /FletPortfolio/
+        run: flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
 
       - name: Verify build output
         run: |

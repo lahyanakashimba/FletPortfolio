@@ -1,4 +1,5 @@
 from pathlib import Path
+import traceback
 from urllib.parse import quote
 
 import flet as ft
@@ -22,11 +23,15 @@ MUTED = "#4B5563"
 LINE = "#E5E7EB"
 
 
+def log_startup(message: str):
+    print(message, flush=True)
+
+
 def ensure_logo() -> str:
     LOGOS_DIR.mkdir(parents=True, exist_ok=True)
     logos = sorted(LOGOS_DIR.glob("unam-logo.*"))
     if logos:
-        return f"assets/logos/{logos[0].name}"
+        return f"logos/{logos[0].name}"
 
     placeholder = LOGOS_DIR / "unam-logo-placeholder.svg"
     if not placeholder.exists():
@@ -40,7 +45,7 @@ def ensure_logo() -> str:
 """,
             encoding="utf-8",
         )
-    return "assets/logos/unam-logo-placeholder.svg"
+    return "logos/unam-logo-placeholder.svg"
 
 
 def border_all(width: int | float, color: str) -> ft.Border:
@@ -48,8 +53,8 @@ def border_all(width: int | float, color: str) -> ft.Border:
     return ft.Border(left=side, top=side, right=side, bottom=side)
 
 
-def web_path(path: Path) -> str:
-    return "/".join(quote(part) for part in path.relative_to(ROOT).parts)
+def asset_certificate_path(path: Path) -> str:
+    return f"certificates/{quote(path.name)}"
 
 
 def certificate_files() -> list[Path]:
@@ -157,7 +162,7 @@ def evidence_card(filename: str, title: str, caption: str) -> ft.Container:
         content=ft.Column(
             [
                 ft.Image(
-                    src=f"assets/screenshots/{filename}",
+                    src=f"screenshots/{filename}",
                     height=180,
                     fit=ft.BoxFit.COVER,
                     border_radius=8,
@@ -180,8 +185,8 @@ def evidence_card(filename: str, title: str, caption: str) -> ft.Container:
 
 
 def certificate_card(path: Path, page: ft.Page) -> ft.Container:
-    href = web_path(path)
     kind = "PDF certificate" if path.suffix.lower() == ".pdf" else "Image certificate"
+    href = asset_certificate_path(path)
 
     def open_file(_):
         page.launch_url(href)
@@ -220,7 +225,7 @@ def certificate_card(path: Path, page: ft.Page) -> ft.Container:
                 ft.Row(
                     [
                         ft.Button("Open", icon=ft.Icons.OPEN_IN_NEW, bgcolor=NAVY, color=WHITE, on_click=open_file),
-                        ft.Button("Download/Open", icon=ft.Icons.DOWNLOAD, bgcolor=CREAM, color=NAVY, on_click=open_file),
+                        ft.Button("View file", icon=ft.Icons.FOLDER_OPEN, bgcolor=CREAM, color=NAVY, on_click=open_file),
                     ],
                     wrap=True,
                     spacing=8,
@@ -565,36 +570,69 @@ def footer() -> ft.Container:
 
 
 def main(page: ft.Page):
-    page.title = "Lahya Nakashimba | Computer Programming I Portfolio Showcase"
-    page.theme_mode = ft.ThemeMode.LIGHT
-    page.bgcolor = PAGE_BG
-    page.scroll = ft.ScrollMode.AUTO
-    page.padding = 0
-    page.spacing = 0
-    page.window.width = 1180
-    page.window.height = 860
+    log_startup("[START] main called")
+    try:
+        page.title = "Lahya Nakashimba | Computer Programming I Portfolio Showcase"
+        page.theme_mode = ft.ThemeMode.LIGHT
+        page.bgcolor = PAGE_BG
+        page.scroll = ft.ScrollMode.AUTO
+        page.padding = 0
+        page.spacing = 0
+        page.window.width = 1180
+        page.window.height = 860
 
-    logo_src = ensure_logo()
+        log_startup("[STEP] loading assets")
+        logo_src = ensure_logo()
 
-    page.add(
-        ft.Column(
-            [
-                navbar(page, logo_src),
-                hero(page, logo_src),
-                about_section(),
-                project_section(),
-                contribution_section(),
-                evidence_section(),
-                certificates_section(page),
-                learning_section(),
-                footer(),
-            ],
-            spacing=0,
-            tight=True,
-            horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+        log_startup("[STEP] scanning certificates")
+        cert_section = certificates_section(page)
+
+        log_startup("[STEP] building page sections")
+        controls = [
+            navbar(page, logo_src),
+            hero(page, logo_src),
+            about_section(),
+            project_section(),
+            contribution_section(),
+            evidence_section(),
+            cert_section,
+            learning_section(),
+            footer(),
+        ]
+
+        log_startup("[STEP] adding controls to page")
+        page.controls.clear()
+        page.add(
+            ft.Column(
+                controls,
+                spacing=0,
+                tight=True,
+                horizontal_alignment=ft.CrossAxisAlignment.STRETCH,
+            )
         )
-    )
+        page.update()
+        log_startup("[DONE] page rendered")
+    except Exception as exc:
+        log_startup(f"[FATAL] Portfolio failed to render: {exc!r}")
+        error_details = traceback.format_exc()
+        print(error_details, flush=True)
+        page.controls.clear()
+        page.add(
+            ft.Container(
+                content=ft.Column(
+                    [
+                        ft.Text("Portfolio failed to load", size=28, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
+                        ft.Text(str(exc), selectable=True, color=INK),
+                        ft.Text(error_details, selectable=True, color=MUTED, size=12),
+                    ],
+                    spacing=12,
+                ),
+                padding=30,
+                bgcolor=WHITE,
+            )
+        )
+        page.update()
 
 
 if __name__ == "__main__":
-    ft.run(main, assets_dir=".")
+    ft.run(main, assets_dir="assets", web_renderer=ft.WebRenderer.CANVAS_KIT, no_cdn=True)
