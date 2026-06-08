@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 from pathlib import Path
@@ -226,6 +227,29 @@ def patch_flutter_bootstrap() -> None:
     bootstrap_path.write_text(js, encoding="utf-8")
 
 
+def normalize_pyodide_lock_hashes() -> None:
+    lock_path = BUILD_WEB / "pyodide" / "pyodide-lock.json"
+    if not lock_path.exists():
+        return
+
+    lock = json.loads(lock_path.read_text(encoding="utf-8"))
+    changed = False
+    for package in lock.get("packages", {}).values():
+        file_name = package.get("file_name")
+        if not file_name:
+            continue
+        package_path = lock_path.parent / file_name
+        if not package_path.exists():
+            continue
+        actual_hash = hashlib.sha256(package_path.read_bytes()).hexdigest()
+        if package.get("sha256") != actual_hash:
+            package["sha256"] = actual_hash
+            changed = True
+
+    if changed:
+        lock_path.write_text(json.dumps(lock, separators=(",", ":")) + "\n", encoding="utf-8")
+
+
 def main() -> None:
     if not BUILD_WEB.exists():
         raise FileNotFoundError(f"Missing Flet build output: {BUILD_WEB}")
@@ -233,6 +257,7 @@ def main() -> None:
     update_manifest()
     patch_index()
     patch_flutter_bootstrap()
+    normalize_pyodide_lock_hashes()
 
 
 if __name__ == "__main__":
