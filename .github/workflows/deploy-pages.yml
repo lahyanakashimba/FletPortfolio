@@ -39,12 +39,16 @@ jobs:
 
       - name: Build Flet web app
         run: |
-          flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
+          flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn --project lahya-portfolio --product "Lahya Nakashimba Portfolio Showcase" --description "Computer Programming I portfolio showcase" --splash-color "#FFFDF5" --splash-dark-color "#FFFDF5" --pwa-background-color "#FFFDF5" --pwa-theme-color "#002F6C"
 
       - name: Patch GitHub Pages asset base paths
         run: |
           perl -0pi -e 's#canvasKitBaseUrl: "/canvaskit/"#canvasKitBaseUrl: "/FletPortfolio/canvaskit/"#' build/web/index.html
           perl -0pi -e 's#pyodideUrl: "/pyodide/pyodide.js"#pyodideUrl: "/FletPortfolio/pyodide/pyodide.js"#' build/web/index.html
+
+      - name: Apply portfolio branding to web build
+        run: |
+          python scripts/brand_web_build.py
 
       - name: Verify build output
         run: |
