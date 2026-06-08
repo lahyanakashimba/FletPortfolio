@@ -20,7 +20,7 @@ flet run --web index.py
 ## Check Sections
 
 - Hero, About, MiningChecklistApp, Individual Contribution, Evidence, Certificates, Learning Outcomes, Challenges, and Footer appear in order.
-- Screenshot placeholders are compact cards around 190px tall.
+- Evidence image cards are compact, readable, and consistent in height.
 - Certificate PDFs render as compact icon cards, not embedded preview panels.
 - The page background is light blue/off-white, with white cards and navy/gold accents.
 - Desktop and browser mode both scroll naturally.

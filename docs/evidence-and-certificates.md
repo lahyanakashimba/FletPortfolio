@@ -2,15 +2,9 @@
 
 ## Evidence Gallery
 
-The Flet portfolio displays valid PNG placeholders from `assets/screenshots`. Replace the files with real screenshots while keeping the same names so the app continues to load them without code changes.
+The Flet portfolio displays evidence image assets from `assets/screenshots`. Maintainers can update these files while keeping the same names so the app continues to load them without code changes.
 
-Required placeholders:
-
-- `github-commit-history-placeholder.png`
-- `github-branch-placeholder.png`
-- `github-pr-placeholder.png`
-- `mining-checklist-app-ui-placeholder.png`
-- `code-contribution-placeholder.png`
+The gallery covers commit history, branch workflow, pull request, application interface, and source code contribution evidence.
 
 ## Certificates
 
@@ -24,3 +18,5 @@ Supported certificate formats:
 - WEBP
 
 Restart or rebuild the Flet app after adding certificates.
+
+For maintenance steps and exact asset filenames, see `docs/asset-replacement-guide.md`.

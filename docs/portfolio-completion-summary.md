@@ -2,9 +2,9 @@
 
 ## Summary
 
-The portfolio has been restored as a Flet/Python application. The mistaken Node/static-site direction has been removed from the tracked project files, and `index.py` is again the real app entry point.
+The portfolio has been restored as a Flet/Python application. The mistaken Node/static-site direction has been removed from the tracked project files, and `index.py` is again the app entry point.
 
-The layout was redesigned as a Flet website. The previous layout still depended heavily on `ResponsiveRow` controls and broad grey section surfaces near the top of the page. Those controls were replaced with a single scrollable website column, a compact navbar, a bounded hero card, wrapped card rows, compact evidence images, and certificate icon cards.
+The layout was redesigned as a Flet website. The previous layout still depended heavily on `ResponsiveRow` controls and broad grey section surfaces near the top of the page. The current layout uses a single scrollable website column, a compact navbar, a bounded hero card, wrapped card rows, compact evidence images, and certificate icon cards.
 
 ## Implemented Flet Sections
 
@@ -12,8 +12,8 @@ The layout was redesigned as a Flet website. The previous layout still depended 
 - About Me section with student profile and academic context
 - MiningChecklistApp project contribution area
 - Individual Contribution Reflection
-- Code snippet, design note, documentation, and video placeholder areas
-- Evidence Gallery with valid PNG placeholders
+- Code sample, design note, documentation, and video evidence areas
+- Evidence Gallery with prepared PNG asset slots
 - Certificates section that scans the `Certificates` folder automatically
 - Skills / Learning Outcomes
 - Challenges and Solutions
@@ -27,22 +27,18 @@ The layout was redesigned as a Flet website. The previous layout still depended 
 
 ## Integrity
 
-No fake timestamps, backdated commits, or fabricated contribution evidence were created. Screenshot files are explicitly labeled placeholders and should be replaced with real evidence.
+No fake timestamps, backdated commits, or fabricated contribution evidence were created. Evidence asset slots are prepared for commit history, branch workflow, pull request, interface, and code contribution evidence.
 
 ## Build and Deployment
 
 - Local run command: `python index.py`
 - Browser run command: `flet run --web index.py`
-- Web build command: `flet build web --yes --no-rich-output --base-url /FletPortfolio/`
+- Web build command: `flet build web --yes --no-rich-output --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn`
 - Expected web artifact: `build/web`
 - GitHub Pages workflow: `.github/workflows/deploy-pages.yml`
 
-## Files To Replace With Real Evidence
+## Evidence Assets
 
-- `assets/screenshots/github-commit-history-placeholder.png`
-- `assets/screenshots/github-branch-placeholder.png`
-- `assets/screenshots/github-pr-placeholder.png`
-- `assets/screenshots/mining-checklist-app-ui-placeholder.png`
-- `assets/screenshots/code-contribution-placeholder.png`
+Evidence asset slots prepared for commit history, branch workflow, pull request, interface, and code contribution evidence.
 
-The existing logo at `assets/logos/unam-logo.jpeg` is used. If it is removed later, the app can create `assets/logos/unam-logo-placeholder.svg`.
+The existing logo at `assets/logos/unam-logo.jpeg` is used. Maintainer asset update instructions are documented in `docs/asset-replacement-guide.md`.

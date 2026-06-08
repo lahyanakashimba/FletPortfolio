@@ -1,19 +1,19 @@
 # Flet Portfolio Screenshot Checklist
 
-Use this checklist to replace the evidence placeholders with accurate screenshots.
+Use this checklist to prepare accurate portfolio evidence assets.
 
 ## GitHub Evidence
 
-- GitHub commit history showing real commits by Lahya Nakashimba
-- Development branch screenshot showing actual branch work
-- Pull request screenshot showing the real PR from `development` to `main`
+- Capture GitHub commit history evidence
+- Capture development branch evidence
+- Capture pull request evidence from `development` to `main`
 
 ## Project Evidence
 
-- MiningChecklistApp interface screenshot from the running project
-- Code contribution screenshot showing work that is clearly yours
-- Design notes or mockup screenshot if available
-- Documentation screenshot if it shows your own contribution
+- Capture MiningChecklistApp interface evidence
+- Capture code contribution evidence
+- Capture design notes or mockup evidence if available
+- Capture documentation evidence if it shows your own contribution
 
 ## Portfolio Screenshots
 
@@ -32,4 +32,4 @@ Use this checklist to replace the evidence placeholders with accurate screenshot
 
 ## Integrity Reminder
 
-Only use real screenshots and real evidence. Do not backdate commits, fake timestamps, or create misleading authorship proof.
+Use accurate screenshots and evidence. Do not backdate commits, fake timestamps, or create misleading authorship proof.

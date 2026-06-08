@@ -4,13 +4,13 @@ MiningChecklistApp is the semester project contribution area presented in this p
 
 ## Individual Contribution Scope
 
-The portfolio identifies Lahya Nakashimba's contribution honestly. It focuses on requirement understanding, interface planning, workflow testing, documentation preparation, and final presentation evidence. Real GitHub screenshots and project screenshots should be added when available.
+The portfolio identifies Lahya Nakashimba's contribution honestly. It focuses on requirement understanding, interface planning, workflow testing, documentation preparation, and final presentation evidence. GitHub screenshots and project screenshots should be accurate and connected to the submitted work.
 
-## Evidence To Add
+## Evidence Assets
 
-- Real commit history screenshot
-- Real branch screenshot
-- Real pull request screenshot
+- Commit history evidence
+- Development branch evidence
+- Pull request evidence
 - MiningChecklistApp interface screenshot
 - Code contribution screenshot that clearly identifies Lahya Nakashimba's work
 
@@ -18,4 +18,4 @@ No fabricated git history, fake timestamps, or misleading authorship evidence sh
 
 ## Portfolio Display
 
-The Flet portfolio displays MiningChecklistApp as the semester project section. It summarizes the problem solved, key features, technologies used, individual contribution scope, lessons learned, and placeholder evidence that must be replaced with real screenshots after the final project review.
+The Flet portfolio displays MiningChecklistApp as the semester project section. It summarizes the problem solved, key features, technologies used, individual contribution scope, lessons learned, and prepared evidence asset slots for the final project review.

@@ -21,7 +21,7 @@ flet run --web index.py
 - Hero card appears immediately below the header.
 - No large blank grey area appears after the header.
 - Sections appear in this order: Hero, About, MiningChecklistApp, Reflection, Evidence, Certificates, Learning Outcomes, Challenges, Footer.
-- Screenshot placeholders are visible and not stretched to full-screen height.
+- Evidence image cards are visible and not stretched to full-screen height.
 - Certificates render as compact cards/icons, not embedded full PDF previews.
 - Scrolling works on desktop and narrow/mobile width.
 

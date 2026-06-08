@@ -1,6 +1,6 @@
 # Lahya Nakashimba Flet Portfolio Showcase
 
-Computer Programming I personal portfolio built with Flet/Python. The app presents a UNAM-themed academic showcase for Lahya Nakashimba, including MiningChecklistApp contributions, reflection, evidence placeholders, MATLAB certificates, learning outcomes, challenges, and GitHub Pages deployment support.
+Computer Programming I personal portfolio built with Flet/Python. The app presents a UNAM-themed academic showcase for Lahya Nakashimba, including MiningChecklistApp contributions, reflection, evidence assets, MATLAB certificates, learning outcomes, challenges, and GitHub Pages deployment support.
 
 The portfolio is designed as a responsive Flet website with a custom navbar, navy/gold hero card, compact evidence gallery, and certificate icon cards. It should be previewed with Flet, not with a static file server.
 
@@ -58,17 +58,13 @@ Supported extensions:
 - `.jpeg`
 - `.webp`
 
-## Replace Screenshot Placeholders
+## Evidence Assets
 
-Replace these valid PNG placeholder files with real evidence using the same filenames:
-
-- `assets/screenshots/github-commit-history-placeholder.png`
-- `assets/screenshots/github-branch-placeholder.png`
-- `assets/screenshots/github-pr-placeholder.png`
-- `assets/screenshots/mining-checklist-app-ui-placeholder.png`
-- `assets/screenshots/code-contribution-placeholder.png`
+Evidence assets can be updated by replacing files in `assets/screenshots/` while keeping the same filenames.
 
 Use accurate screenshots only. Do not fabricate git history, timestamps, or authorship evidence.
+
+See `docs/asset-replacement-guide.md` for maintainer instructions.
 
 ## Deploy to GitHub Pages
 

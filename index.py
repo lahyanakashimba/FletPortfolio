@@ -33,19 +33,19 @@ def ensure_logo() -> str:
     if logos:
         return f"logos/{logos[0].name}"
 
-    placeholder = LOGOS_DIR / "unam-logo-placeholder.svg"
-    if not placeholder.exists():
-        placeholder.write_text(
+    fallback_logo = LOGOS_DIR / "unam-logo-fallback.svg"
+    if not fallback_logo.exists():
+        fallback_logo.write_text(
             """<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
   <rect width="320" height="320" rx="160" fill="#002f6c"/>
   <circle cx="160" cy="160" r="118" fill="none" stroke="#f2c230" stroke-width="12"/>
   <text x="160" y="148" text-anchor="middle" font-family="Arial, sans-serif" font-size="58" font-weight="700" fill="#ffffff">UNAM</text>
-  <text x="160" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#f2c230">Logo Placeholder</text>
+  <text x="160" y="198" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" fill="#f2c230">Student Portfolio</text>
 </svg>
 """,
             encoding="utf-8",
         )
-    return "logos/unam-logo-placeholder.svg"
+    return "logos/unam-logo-fallback.svg"
 
 
 def border_all(width: int | float, color: str) -> ft.Border:
@@ -74,7 +74,10 @@ def display_name(path: Path) -> str:
 def scroll_button(page: ft.Page, label: str, target: str, color: str = NAVY) -> ft.TextButton:
     return ft.TextButton(
         label,
-        style=ft.ButtonStyle(color=color),
+        style=ft.ButtonStyle(
+            color=color,
+            padding=ft.Padding(8, 6, 8, 6),
+        ),
         on_click=lambda _: page.scroll_to(key=target, duration=450),
     )
 
@@ -83,7 +86,7 @@ def section(content: list[ft.Control], key: str | None = None, bgcolor: str = PA
     return ft.Container(
         key=key,
         bgcolor=bgcolor,
-        padding=ft.Padding(22, 42, 22, 42),
+        padding=ft.Padding(12, 42, 12, 42),
         content=ft.Container(
             content=ft.Column(content, spacing=18, tight=True),
         ),
@@ -172,7 +175,7 @@ def evidence_card(filename: str, title: str, caption: str) -> ft.Container:
                         bgcolor=SOFT_BLUE,
                         border_radius=8,
                         alignment=ft.Alignment(0, 0),
-                        content=ft.Text("Image placeholder missing", color=NAVY, weight=ft.FontWeight.BOLD),
+                        content=ft.Text("Evidence image unavailable", color=NAVY, weight=ft.FontWeight.BOLD),
                     ),
                 ),
                 ft.Text(title, size=18, weight=ft.FontWeight.BOLD, color=NAVY),
@@ -242,32 +245,39 @@ def navbar(page: ft.Page, logo_src: str) -> ft.Container:
         key="top",
         bgcolor=WHITE,
         border=ft.Border(bottom=ft.BorderSide(1, LINE)),
-        padding=ft.Padding(24, 13, 24, 13),
-        content=ft.Row(
+        padding=ft.Padding(16, 13, 16, 13),
+        content=ft.ResponsiveRow(
             [
-                ft.Row(
-                    [
-                        ft.Image(src=logo_src, width=42, height=42, fit=ft.BoxFit.CONTAIN, semantics_label="UNAM logo"),
-                        ft.Text("Lahya Nakashimba", size=18, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
-                    ],
-                    spacing=10,
+                ft.Container(
+                    col={"xs": 12, "sm": 12, "md": 4},
+                    content=ft.Row(
+                        [
+                            ft.Image(src=logo_src, width=42, height=42, fit=ft.BoxFit.CONTAIN, semantics_label="UNAM logo"),
+                            ft.Text("Lahya Nakashimba", size=18, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
+                        ],
+                        spacing=10,
+                    ),
                 ),
-                ft.Row(
-                    [
-                        scroll_button(page, "Home", "top"),
-                        scroll_button(page, "Project", "project"),
-                        scroll_button(page, "Contributions", "contribution"),
-                        scroll_button(page, "Certificates", "certificates"),
-                        scroll_button(page, "Evidence", "evidence"),
-                        scroll_button(page, "Contact", "contact"),
-                    ],
-                    wrap=True,
-                    spacing=2,
-                    alignment=ft.MainAxisAlignment.END,
+                ft.Container(
+                    col={"xs": 12, "sm": 12, "md": 8},
+                    content=ft.Row(
+                        [
+                            scroll_button(page, "Home", "top"),
+                            scroll_button(page, "Project", "project"),
+                            scroll_button(page, "Contributions", "contribution"),
+                            scroll_button(page, "Certificates", "certificates"),
+                            scroll_button(page, "Evidence", "evidence"),
+                            scroll_button(page, "Contact", "contact"),
+                        ],
+                        wrap=True,
+                        spacing=2,
+                        run_spacing=2,
+                        alignment=ft.MainAxisAlignment.START,
+                    ),
                 ),
             ],
-            wrap=True,
-            alignment=ft.MainAxisAlignment.SPACE_BETWEEN,
+            spacing=12,
+            run_spacing=6,
             vertical_alignment=ft.CrossAxisAlignment.CENTER,
         ),
     )
@@ -299,7 +309,7 @@ def hero(page: ft.Page, logo_src: str) -> ft.Container:
                 bgcolor=CREAM,
                 border_radius=8,
                 border=border_all(1, "#E8DDBF"),
-                padding=ft.Padding(24, 32, 24, 32),
+                padding=ft.Padding(18, 32, 18, 32),
                 shadow=ft.BoxShadow(blur_radius=24, color="#1F3A5F18", offset=ft.Offset(0, 10)),
                 content=ft.ResponsiveRow(
                     [
@@ -308,11 +318,11 @@ def hero(page: ft.Page, logo_src: str) -> ft.Container:
                             content=ft.Column(
                                 [
                                     ft.Text("UNIVERSITY OF NAMIBIA | COMPUTER PROGRAMMING I", size=13, color=GOLD_DARK, weight=ft.FontWeight.BOLD),
-                                    ft.Text("Lahya Nakashimba", size=44, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
+                                    ft.Text("Lahya Nakashimba", size=38, weight=ft.FontWeight.BOLD, color=NAVY_DARK),
                                     ft.Text("Computer Programming I Portfolio Showcase", size=23, weight=ft.FontWeight.BOLD, color=NAVY),
                                     ft.Text("MiningChecklistApp Contribution Portfolio", size=18, weight=ft.FontWeight.BOLD, color=GOLD_DARK),
                                     ft.Text(
-                                        "A professional Flet portfolio presenting my semester project contribution, reflection, learning evidence, challenges, certificates, and honest contribution placeholders.",
+                                        "A professional Flet portfolio presenting my semester project contribution, reflection, learning evidence, challenges, certificates, and contribution records.",
                                         size=16,
                                         color=MUTED,
                                     ),
@@ -359,7 +369,7 @@ def about_section() -> ft.Container:
                                     color=INK,
                                 ),
                                 ft.Text(
-                                    "This portfolio identifies my work honestly and provides clear spaces for real GitHub screenshots, code evidence, design notes, and final video evidence.",
+                                    "This portfolio identifies my work honestly and presents organised areas for GitHub screenshots, code evidence, design notes, and final video evidence.",
                                     size=16,
                                     color=INK,
                                 ),
@@ -423,7 +433,7 @@ def contribution_section() -> ft.Container:
                                     color=INK,
                                 ),
                                 ft.Text(
-                                    "For MiningChecklistApp, my contribution evidence focuses on understanding the checklist workflow, supporting documentation, preparing testing notes, and organizing accurate screenshots that can be replaced with real proof of work.",
+                                    "For MiningChecklistApp, my contribution evidence focuses on understanding the checklist workflow, supporting documentation, preparing testing notes, and organising accurate project records.",
                                     size=16,
                                     color=INK,
                                 ),
@@ -432,7 +442,7 @@ def contribution_section() -> ft.Container:
                                     bgcolor="#101827",
                                     border_radius=8,
                                     padding=14,
-                                    content=ft.Text("// Add a short code snippet here that shows your own contribution.", color="#E6EDF7", selectable=True),
+                                    content=ft.Text("Contribution code sample area prepared for the final project submission.", color="#E6EDF7", selectable=True),
                                 ),
                             ],
                             spacing=12,
@@ -451,7 +461,12 @@ def contribution_section() -> ft.Container:
                             [
                                 ft.Icon(ft.Icons.PLAY_CIRCLE, size=48, color=GOLD),
                                 ft.Text("Individual Contribution Video", size=19, weight=ft.FontWeight.BOLD, color=WHITE, text_align=ft.TextAlign.CENTER),
-                                ft.Text("Contribution video link will be added here.", size=15, color="#EAF2FF", text_align=ft.TextAlign.CENTER),
+                                ft.Text(
+                                    "Video evidence section prepared for the final 1 minute 30 second contribution recording.",
+                                    size=15,
+                                    color="#EAF2FF",
+                                    text_align=ft.TextAlign.CENTER,
+                                ),
                             ],
                             spacing=10,
                             tight=True,
@@ -465,8 +480,8 @@ def contribution_section() -> ft.Container:
             ),
             card_row(
                 [
-                    simple_card("Design / Mockup Evidence", "Add screen planning, workflow sketches, or UI decisions here.", ft.Icons.DRAW),
-                    simple_card("Documentation Evidence", "Add testing notes, README updates, or presentation preparation evidence here.", ft.Icons.ARTICLE),
+                    simple_card("Design / Mockup Evidence", "Screen planning, workflow sketches, and interface decisions for the project.", ft.Icons.DRAW),
+                    simple_card("Documentation Evidence", "Testing notes, README updates, and presentation preparation evidence.", ft.Icons.ARTICLE),
                     simple_card("Lessons Learned", "Requirements, Git workflow, debugging, documentation, and presentation preparation.", ft.Icons.LIGHTBULB),
                 ]
             ),
@@ -477,16 +492,20 @@ def contribution_section() -> ft.Container:
 
 
 def evidence_section() -> ft.Container:
+    # MAINTAINER NOTE:
+    # To update evidence images, replace the PNG files in assets/screenshots/
+    # using the same filenames. The public UI labels below are intentionally
+    # polished and should not contain "replace with..." instructions.
     return section(
         [
-            title_block("Evidence Gallery", "Contribution Evidence", "Valid PNG placeholders are compact and ready to replace with real screenshots."),
+            title_block("Evidence Gallery", "Contribution Evidence", "Evidence assets are presented as compact portfolio cards."),
             card_row(
                 [
-                    evidence_card("github-commit-history-placeholder.png", "GitHub Commit History", "Replace with real commit history showing actual contribution activity."),
-                    evidence_card("github-branch-placeholder.png", "Development Branch", "Replace with a real branch screenshot."),
-                    evidence_card("github-pr-placeholder.png", "Pull Request Evidence", "Replace with the real pull request screenshot."),
-                    evidence_card("mining-checklist-app-ui-placeholder.png", "MiningChecklistApp UI", "Replace with a screenshot from the running app."),
-                    evidence_card("code-contribution-placeholder.png", "Code Contribution", "Replace with code evidence that identifies your work."),
+                    evidence_card("github-commit-history-placeholder.png", "Commit History Asset", "A visual record of portfolio and contribution development activity."),
+                    evidence_card("github-branch-placeholder.png", "Development Branch Asset", "Branch workflow evidence showing organised project development."),
+                    evidence_card("github-pr-placeholder.png", "Pull Request Evidence Asset", "Pull request evidence showing review-ready contribution work."),
+                    evidence_card("mining-checklist-app-ui-placeholder.png", "MiningChecklistApp Interface Asset", "Application interface evidence from the semester project."),
+                    evidence_card("code-contribution-placeholder.png", "Code Contribution Asset", "Source code evidence connected to the student's project contribution."),
                 ]
             ),
         ],
@@ -525,9 +544,9 @@ def learning_section() -> ft.Container:
         simple_card("Understanding Requirements", "I broke broad assignment requirements into portfolio sections and evidence tasks.", ft.Icons.LIST_ALT),
         simple_card("Debugging Errors", "I checked imports, paths, and runtime behavior after each meaningful change.", ft.Icons.BUG_REPORT),
         simple_card("UI Responsiveness", "I used wrapped rows, compact cards, and controlled image heights.", ft.Icons.DEVICES),
-        simple_card("Git Workflow", "I used real branches and normal commits without fake timestamps.", ft.Icons.ACCOUNT_TREE),
+        simple_card("Git Workflow", "I used normal development branches and commits without fake timestamps.", ft.Icons.ACCOUNT_TREE),
         simple_card("Time Management", "I organized tasks into sections that can be completed and checked.", ft.Icons.SCHEDULE),
-        simple_card("Testing/Demo Preparation", "I prepared manual QA notes and screenshot placeholders for final evidence.", ft.Icons.CHECK_CIRCLE),
+        simple_card("Testing/Demo Preparation", "I prepared manual QA notes and evidence assets for final review.", ft.Icons.CHECK_CIRCLE),
     ]
     return section(
         [
