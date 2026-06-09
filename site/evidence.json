@@ -1,0 +1,27 @@
+[
+  {
+    "title": "Commit History Asset",
+    "caption": "A visual record of portfolio and contribution development activity.",
+    "src": "assets/evidence/commit-history.png"
+  },
+  {
+    "title": "Development Branch Asset",
+    "caption": "Branch workflow evidence showing organised project development.",
+    "src": "assets/evidence/development-branch.png"
+  },
+  {
+    "title": "Pull Request Evidence Asset",
+    "caption": "Pull request evidence showing review-ready contribution work.",
+    "src": "assets/evidence/pull-request-evidence.png"
+  },
+  {
+    "title": "MiningChecklistApp Interface Asset",
+    "caption": "Application interface evidence from the semester project.",
+    "src": "assets/evidence/mining-checklist-interface.png"
+  },
+  {
+    "title": "Code Contribution Asset",
+    "caption": "Source code evidence connected to the student's project contribution.",
+    "src": "assets/evidence/code-contribution.png"
+  }
+]

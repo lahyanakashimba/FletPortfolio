@@ -24,10 +24,10 @@ Use this checklist to prepare accurate portfolio evidence assets.
 - Certificates section
 - Footer/contact section
 
-## Flet Build Evidence
+## Portfolio Deployment Evidence
 
 - Screenshot of `python index.py` running successfully
-- Screenshot of `build/web` after a successful Flet web build
+- Screenshot of the static site served from `site/`
 - Screenshot of the GitHub Pages deployment workflow after it completes
 
 ## Integrity Reminder

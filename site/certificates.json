@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Calculations with Vectors and Matrices",
+    "type": "PDF",
+    "href": "assets/certificates/Calculations%20with%20Vectors%20and%20Matrices.pdf"
+  },
+  {
+    "title": "Explore Data with MATLAB Plots",
+    "type": "PDF",
+    "href": "assets/certificates/Explore%20Data%20with%20MATLAB%20Plots.pdf"
+  },
+  {
+    "title": "Machine Learning Onramp",
+    "type": "PDF",
+    "href": "assets/certificates/Machine%20Learning%20Onramp.pdf"
+  },
+  {
+    "title": "Make and Manipulate Matrices",
+    "type": "PDF",
+    "href": "assets/certificates/Make%20and%20Manipulate%20Matrices.pdf"
+  },
+  {
+    "title": "MATLAB Onramp",
+    "type": "PDF",
+    "href": "assets/certificates/MATLAB%20Onramp.pdf"
+  },
+  {
+    "title": "Simulink Onramp",
+    "type": "PDF",
+    "href": "assets/certificates/Simulink%20Onramp.pdf"
+  }
+]

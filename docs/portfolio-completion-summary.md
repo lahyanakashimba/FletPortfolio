@@ -2,11 +2,11 @@
 
 ## Summary
 
-The portfolio has been restored as a Flet/Python application. The mistaken Node/static-site direction has been removed from the tracked project files, and `index.py` is again the app entry point.
+The portfolio keeps the original Flet/Python application source in `index.py` and `main.py`, while GitHub Pages now deploys a fast static version from `site/`.
 
-The layout was redesigned as a Flet website. The previous layout still depended heavily on `ResponsiveRow` controls and broad grey section surfaces near the top of the page. The current layout uses a single scrollable website column, a compact navbar, a bounded hero card, wrapped card rows, compact evidence images, and certificate icon cards.
+The static layout uses the same portfolio content and UNAM-inspired visual direction: a compact navbar, a bounded hero card, wrapped card rows, compact evidence images, and certificate cards.
 
-## Implemented Flet Sections
+## Implemented Portfolio Sections
 
 - Hero section with Lahya Nakashimba, course title, UNAM theme, and navigation buttons
 - About Me section with student profile and academic context
@@ -21,6 +21,7 @@ The layout was redesigned as a Flet website. The previous layout still depended 
 
 ## Layout QA
 
+- Static preview command: `python -m http.server 8000 --directory site`
 - Browser mode command: `flet run --web index.py`
 - Desktop mode command: `python index.py`
 - Manual QA note: `docs/qa/manual-website-layout-check.md`
@@ -31,10 +32,11 @@ No fake timestamps, backdated commits, or fabricated contribution evidence were 
 
 ## Build and Deployment
 
+- Static generator command: `python scripts/generate_static_site.py`
+- Static preview command: `python -m http.server 8000 --directory site`
+- GitHub Pages artifact: `site/`
 - Local run command: `python index.py`
 - Browser run command: `flet run --web index.py`
-- Web build command: `flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn`
-- Expected web artifact: `build/web`
 - GitHub Pages workflow: `.github/workflows/deploy-pages.yml`
 
 ## Evidence Assets

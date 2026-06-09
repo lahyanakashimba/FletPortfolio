@@ -1,62 +1,49 @@
-# Flet GitHub Pages Deployment
+# Static GitHub Pages Deployment
 
-This portfolio is a Flet/Python app. GitHub Pages must deploy the Flet web build output, not the repository root and not a Node/static build.
+This portfolio keeps the original Python/Flet source in the repository, but GitHub Pages deploys the fast static site in `site/`.
 
-Use GitHub Actions as the Pages source. Do not use "Deploy from a branch" with `main / root`, because raw Python files are not a deployable GitHub Pages website.
+The live site is plain HTML, CSS, JavaScript, images, and PDFs. It does not load Flet, Pyodide, Flutter, or a Python worker in the browser.
 
 ## Workflow
 
 The workflow at `.github/workflows/deploy-pages.yml`:
 
 1. Checks out the repository.
-2. Sets up Python 3.12.
-3. Installs Flutter through `subosito/flutter-action`.
-4. Installs dependencies from `requirements.txt`.
-5. Runs `flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn`.
-6. Verifies that `build/web` exists.
-7. Uploads `build/web`.
-8. Deploys the artifact to GitHub Pages.
+2. Runs `python scripts/generate_static_site.py`.
+3. Uploads `site/` as the Pages artifact.
+4. Deploys the artifact to GitHub Pages.
 
-The workflow installs Flutter explicitly because local Flet web builds require Flutter SDK support.
+## Local Static Preview
 
-## Local Build
+Regenerate assets:
 
-```bash
-python -m venv .venv
-.\.venv\Scripts\activate
-python -m pip install --upgrade pip
-python -m pip install -r requirements.txt
-flet build web --yes --no-rich-output --module-name index --base-url /FletPortfolio/ --web-renderer canvaskit --no-wasm --no-cdn
+```powershell
+python scripts/generate_static_site.py
 ```
 
-Expected output:
+Serve the static site:
+
+```powershell
+python -m http.server 8000 --directory site
+```
+
+Open:
 
 ```text
-build/web
+http://localhost:8000
 ```
 
-## Windows Notes
+## Flet Source
 
-If the local Flet CLI fails with a Unicode console error, set:
+The Flet version remains available in:
 
-```powershell
-$env:PYTHONUTF8='1'
-$env:PYTHONIOENCODING='utf-8'
-$env:FLET_CLI_NO_RICH_OUTPUT='1'
+```text
+index.py
+main.py
+requirements.txt
 ```
 
-If Flutter SDK installation takes a long time locally, let GitHub Actions run the build after the branch is merged.
-
-## Local App Preview
-
-Do not use `python -m http.server` from the repository root as the main app. Use:
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-python index.py
-```
-
-Or run browser mode:
+Use it only when working on the original Python/Flet source:
 
 ```powershell
 flet run --web index.py
@@ -64,12 +51,11 @@ flet run --web index.py
 
 ## GitHub Pages Setup
 
-1. Push `development`.
-2. Open and merge the PR into `main`.
-3. Go to repository Settings.
-4. Open Pages.
-5. Select GitHub Actions as the source.
-6. Run the deployment workflow if it does not start automatically.
+1. Push changes to `main`.
+2. Go to repository Settings.
+3. Open Pages.
+4. Select GitHub Actions as the source.
+5. Run the static deployment workflow if it does not start automatically.
 
 Expected URL:
 
