@@ -125,7 +125,7 @@ function renderProfileImages(items) {
       const heading = document.createElement("h3");
       heading.textContent = item.title;
       const description = document.createElement("p");
-      description.textContent = "Portfolio image presented as part of the student project showcase.";
+      description.textContent = "Portfolio image.";
       caption.append(heading, description);
       figure.append(caption);
       card.append(figure);
