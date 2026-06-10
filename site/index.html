@@ -29,6 +29,7 @@
           <a href="#top">Home</a>
           <a href="#project">Project</a>
           <a href="#contribution">Contributions</a>
+          <a href="#gallery">Gallery</a>
           <a href="#certificates">Certificates</a>
           <a href="#evidence">Evidence</a>
           <a href="#contact">Contact</a>
@@ -54,11 +55,15 @@
               <a class="button warm" href="#evidence">View Evidence</a>
             </div>
           </div>
-          <div class="hero-visual" aria-label="Portfolio summary">
-            <img src="assets/logos/unam-logo.jpeg" alt="UNAM logo">
-            <div>MiningChecklistApp Contribution Portfolio</div>
-            <div>Reflection, evidence, certificates, and learning outcomes</div>
-            <div>Prepared for Computer Programming I</div>
+          <div class="hero-visual" aria-label="Student profile portrait">
+            <div class="portrait-frame" id="hero-profile">
+              <div class="profile-fallback" aria-label="Student initials">LN</div>
+            </div>
+            <div class="hero-visual-text">
+              <span>Student Profile</span>
+              <strong>MiningChecklistApp Contribution Portfolio</strong>
+              <span>Prepared for Computer Programming I</span>
+            </div>
           </div>
         </div>
       </section>
@@ -79,13 +84,27 @@
               screenshots, code evidence, design notes, and final video evidence.
             </p>
           </div>
-          <article class="card">
-            <div class="card-icon">AC</div>
-            <h3>Academic Context</h3>
-            <p>Course: Computer Programming I</p>
+          <article class="profile-summary card">
+            <div class="profile-summary-header">
+              <div class="card-icon">AC</div>
+              <div>
+                <h3>Academic Context</h3>
+                <p>Course: Computer Programming I</p>
+              </div>
+            </div>
             <p>Institution: University of Namibia</p>
             <p>Portfolio year: 2026</p>
+            <div class="mini-profile-grid" id="about-profile-images" aria-label="Student profile images"></div>
           </article>
+        </div>
+      </section>
+
+      <section class="section" id="gallery">
+        <div class="shell">
+          <p class="eyebrow blue">Portfolio Gallery</p>
+          <h2>Student Portfolio Gallery</h2>
+          <p class="section-subtitle">Profile and project presentation images are shown in a balanced responsive layout.</p>
+          <div class="grid profile-gallery" id="profile-gallery" aria-live="polite"></div>
         </div>
       </section>
 

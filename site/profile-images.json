@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Student Profile",
+    "filename": "Image1.jpeg",
+    "src": "assets/pictures/Image1.jpeg"
+  },
+  {
+    "title": "Project Presentation Asset",
+    "filename": "Image2.jpeg",
+    "src": "assets/pictures/Image2.jpeg"
+  },
+  {
+    "title": "Profile Image Asset",
+    "filename": "Image3.jpeg",
+    "src": "assets/pictures/Image3.jpeg"
+  }
+]

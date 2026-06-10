@@ -16,6 +16,8 @@ ICON_SOURCES = {
     "icon-192.png": ROOT / "assets" / "icon-192.png",
     "icon-512.png": ROOT / "assets" / "icon-512.png",
 }
+PROFILE_SOURCE_DIR = ROOT / "assets" / "pictures"
+SUPPORTED_PROFILE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
 
 EVIDENCE_ASSETS = [
     (
@@ -55,8 +57,29 @@ def display_name(path: Path) -> str:
     return path.stem.replace("_", " ").replace("-", " ").strip()
 
 
+def list_profile_images() -> list[Path]:
+    if not PROFILE_SOURCE_DIR.exists():
+        return []
+    return sorted(
+        [
+            source
+            for source in PROFILE_SOURCE_DIR.iterdir()
+            if source.is_file() and source.suffix.lower() in SUPPORTED_PROFILE_EXTENSIONS
+        ],
+        key=lambda item: item.name.lower(),
+    )
+
+
+def profile_caption(path: Path, index: int) -> str:
+    if index == 0:
+        return "Student Profile"
+    if index == 1:
+        return "Project Presentation Asset"
+    return "Profile Image Asset"
+
+
 def reset_generated_assets() -> None:
-    for subdir in ("logos", "icons", "evidence", "certificates"):
+    for subdir in ("logos", "icons", "evidence", "certificates", "pictures"):
         target = SITE_ASSETS / subdir
         if target.exists():
             shutil.rmtree(target)
@@ -87,6 +110,25 @@ def copy_required_assets() -> None:
 
     (SITE / "evidence.json").write_text(
         json.dumps(evidence_manifest, indent=2) + "\n",
+        encoding="utf-8",
+    )
+
+
+def generate_profile_images_json() -> None:
+    profile_images = []
+    for index, source in enumerate(list_profile_images()):
+        destination = SITE_ASSETS / "pictures" / source.name
+        shutil.copyfile(source, destination)
+        profile_images.append(
+            {
+                "title": profile_caption(source, index),
+                "filename": source.name,
+                "src": f"assets/pictures/{quote(source.name)}",
+            }
+        )
+
+    (SITE / "profile-images.json").write_text(
+        json.dumps(profile_images, indent=2) + "\n",
         encoding="utf-8",
     )
 
@@ -122,6 +164,7 @@ def main() -> None:
     SITE.mkdir(exist_ok=True)
     reset_generated_assets()
     copy_required_assets()
+    generate_profile_images_json()
     generate_certificates_json()
 
 

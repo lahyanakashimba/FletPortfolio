@@ -74,7 +74,68 @@ function renderCertificates(items) {
   }
 }
 
+function renderProfileImages(items) {
+  const heroProfile = document.querySelector("#hero-profile");
+  const aboutGrid = document.querySelector("#about-profile-images");
+  const galleryGrid = document.querySelector("#profile-gallery");
+  const gallerySection = document.querySelector("#gallery");
+
+  if (!items.length) {
+    if (gallerySection) {
+      gallerySection.hidden = true;
+    }
+    return;
+  }
+
+  const createImage = (item, alt) => {
+    const image = document.createElement("img");
+    image.src = item.src;
+    image.alt = alt;
+    image.loading = "lazy";
+    image.decoding = "async";
+    return image;
+  };
+
+  if (heroProfile) {
+    heroProfile.innerHTML = "";
+    const image = createImage(items[0], `${items[0].title} portrait`);
+    image.loading = "eager";
+    heroProfile.append(image);
+  }
+
+  if (aboutGrid) {
+    aboutGrid.innerHTML = "";
+    for (const item of items.slice(0, 3)) {
+      const figure = document.createElement("figure");
+      figure.append(createImage(item, item.title));
+      aboutGrid.append(figure);
+    }
+  }
+
+  if (galleryGrid) {
+    galleryGrid.innerHTML = "";
+    for (const item of items) {
+      const card = document.createElement("article");
+      card.className = "profile-gallery-card card";
+
+      const figure = document.createElement("figure");
+      figure.append(createImage(item, item.title));
+
+      const caption = document.createElement("figcaption");
+      const heading = document.createElement("h3");
+      heading.textContent = item.title;
+      const description = document.createElement("p");
+      description.textContent = "Portfolio image presented as part of the student project showcase.";
+      caption.append(heading, description);
+      figure.append(caption);
+      card.append(figure);
+      galleryGrid.append(card);
+    }
+  }
+}
+
 Promise.all([
+  loadJson("profile-images.json").then(renderProfileImages),
   loadJson("evidence.json").then(renderEvidence),
   loadJson("certificates.json").then(renderCertificates),
 ]).catch((error) => {
