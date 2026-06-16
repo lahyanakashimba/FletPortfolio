@@ -134,6 +134,36 @@ function renderProfileImages(items) {
   }
 }
 
+async function renderContributionVideo() {
+  const videoCard = document.querySelector("#video");
+  const videoSlot = document.querySelector("#contribution-video");
+  const source = videoCard?.dataset.videoSrc;
+
+  if (!videoSlot || !source) {
+    return;
+  }
+
+  try {
+    const response = await fetch(source, { method: "HEAD", cache: "no-store" });
+    if (!response.ok) {
+      throw new Error("Contribution video not found");
+    }
+
+    videoSlot.innerHTML = `
+      <video controls preload="metadata" aria-label="Individual contribution video">
+        <source src="${source}" type="video/mp4">
+        <a href="${source}">Open contribution video</a>
+      </video>
+      <a class="video-link" href="${source}" target="_blank" rel="noopener">Open video in a new tab</a>
+    `;
+  } catch {
+    videoSlot.innerHTML = `
+      <p>Contribution video file is not available yet.</p>
+      <p>Add <code>assets/videos/contribution-video.mp4</code> and regenerate the static site.</p>
+    `;
+  }
+}
+
 Promise.all([
   loadJson("profile-images.json").then(renderProfileImages),
   loadJson("evidence.json").then(renderEvidence),
@@ -141,3 +171,5 @@ Promise.all([
 ]).catch((error) => {
   console.error(error);
 });
+
+renderContributionVideo();

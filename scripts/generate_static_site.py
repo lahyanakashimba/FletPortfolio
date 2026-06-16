@@ -18,6 +18,7 @@ ICON_SOURCES = {
 }
 PROFILE_SOURCE_DIR = ROOT / "assets" / "pictures"
 SUPPORTED_PROFILE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".webp", ".gif"}
+CONTRIBUTION_VIDEO_SOURCE = ROOT / "assets" / "videos" / "contribution-video.mp4"
 
 EVIDENCE_ASSETS = [
     (
@@ -50,6 +51,18 @@ EVIDENCE_ASSETS = [
         "Code Contribution Asset",
         "Source code evidence connected to the student's project contribution.",
     ),
+    (
+        ROOT / "assets" / "pictures" / "github" / "main_repo.png",
+        "github-main-repository.png",
+        "GitHub Repository Evidence",
+        "Repository evidence showing the portfolio and project materials prepared for review.",
+    ),
+    (
+        ROOT / "assets" / "pictures" / "github" / "my_commits.png",
+        "github-commit-evidence.png",
+        "GitHub Commit Evidence",
+        "Commit evidence showing development activity connected to the portfolio work.",
+    ),
 ]
 
 
@@ -79,7 +92,7 @@ def profile_caption(path: Path, index: int) -> str:
 
 
 def reset_generated_assets() -> None:
-    for subdir in ("logos", "icons", "evidence", "certificates", "pictures"):
+    for subdir in ("logos", "icons", "evidence", "certificates", "pictures", "videos"):
         target = SITE_ASSETS / subdir
         if target.exists():
             shutil.rmtree(target)
@@ -112,6 +125,9 @@ def copy_required_assets() -> None:
         json.dumps(evidence_manifest, indent=2) + "\n",
         encoding="utf-8",
     )
+
+    if CONTRIBUTION_VIDEO_SOURCE.exists():
+        shutil.copyfile(CONTRIBUTION_VIDEO_SOURCE, SITE_ASSETS / "videos" / "contribution-video.mp4")
 
 
 def generate_profile_images_json() -> None:

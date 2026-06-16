@@ -23,5 +23,15 @@
     "title": "Code Contribution Asset",
     "caption": "Source code evidence connected to the student's project contribution.",
     "src": "assets/evidence/code-contribution.png"
+  },
+  {
+    "title": "GitHub Repository Evidence",
+    "caption": "Repository evidence showing the portfolio and project materials prepared for review.",
+    "src": "assets/evidence/github-main-repository.png"
+  },
+  {
+    "title": "GitHub Commit Evidence",
+    "caption": "Commit evidence showing development activity connected to the portfolio work.",
+    "src": "assets/evidence/github-commit-evidence.png"
   }
 ]

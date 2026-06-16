@@ -8,6 +8,8 @@ import flet as ft
 ROOT = Path(__file__).resolve().parent
 CERTIFICATES_DIR = ROOT / "Certificates"
 LOGOS_DIR = ROOT / "assets" / "logos"
+VIDEO_DIR = ROOT / "assets" / "videos"
+CONTRIBUTION_VIDEO = VIDEO_DIR / "contribution-video.mp4"
 
 NAVY = "#002F6C"
 NAVY_DARK = "#001D43"
@@ -38,6 +40,10 @@ def border_all(width: int | float, color: str) -> ft.Border:
 
 def asset_certificate_path(path: Path) -> str:
     return f"certificates/{quote(path.name)}"
+
+
+def asset_video_path(path: Path) -> str:
+    return f"videos/{quote(path.name)}"
 
 
 def certificate_files() -> list[Path]:
@@ -223,6 +229,69 @@ def certificate_card(path: Path, page: ft.Page) -> ft.Container:
     )
 
 
+def contribution_video_card(page: ft.Page) -> ft.Container:
+    if CONTRIBUTION_VIDEO.exists():
+        href = asset_video_path(CONTRIBUTION_VIDEO)
+
+        def open_video(_):
+            page.launch_url(href)
+
+        return ft.Container(
+            col={"xs": 12, "sm": 12, "md": 4},
+            bgcolor=WHITE,
+            border=border_all(1, LINE),
+            border_radius=8,
+            padding=20,
+            content=ft.Column(
+                [
+                    ft.Icon(ft.Icons.PLAY_CIRCLE, size=44, color=GOLD),
+                    ft.Text("Individual Contribution Video", size=18, weight=ft.FontWeight.BOLD, color=NAVY, text_align=ft.TextAlign.CENTER),
+                    ft.Text(
+                        "Play the recorded contribution video from the app assets.",
+                        size=14,
+                        color=MUTED,
+                        text_align=ft.TextAlign.CENTER,
+                    ),
+                    ft.Container(
+                        content=ft.Row(
+                            [
+                                ft.Button("Open Video", icon=ft.Icons.PLAY_CIRCLE_OUTLINE, bgcolor=NAVY, color=WHITE, on_click=open_video),
+                            ],
+                            alignment=ft.MainAxisAlignment.CENTER,
+                        ),
+                        padding=ft.Padding(0, 10, 0, 0),
+                    ),
+                ],
+                spacing=14,
+                tight=True,
+                horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+            ),
+        )
+
+    return ft.Container(
+        col={"xs": 12, "sm": 12, "md": 4},
+        bgcolor=WHITE,
+        border=border_all(1, LINE),
+        border_radius=8,
+        padding=20,
+        content=ft.Column(
+            [
+                ft.Icon(ft.Icons.WARNING_AMBER, size=44, color=GOLD),
+                ft.Text("Contribution Video Missing", size=18, weight=ft.FontWeight.BOLD, color=NAVY, text_align=ft.TextAlign.CENTER),
+                ft.Text(
+                    "Add assets/videos/contribution-video.mp4 and restart the app to enable playback.",
+                    size=14,
+                    color=MUTED,
+                    text_align=ft.TextAlign.CENTER,
+                ),
+            ],
+            spacing=14,
+            tight=True,
+            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
+        ),
+    )
+
+
 def navbar(page: ft.Page, logo_src: str) -> ft.Container:
     return ft.Container(
         key="top",
@@ -395,7 +464,7 @@ def project_section() -> ft.Container:
     )
 
 
-def contribution_section() -> ft.Container:
+def contribution_section(page: ft.Page) -> ft.Container:
     return section(
         [
             title_block("Individual Contribution", "Contribution Reflection", "Written in an honest student style without overclaiming."),
@@ -432,30 +501,7 @@ def contribution_section() -> ft.Container:
                             tight=True,
                         ),
                     ),
-                    ft.Container(
-                        key="video",
-                        col={"xs": 12, "sm": 12, "md": 4},
-                        height=220,
-                        bgcolor=NAVY,
-                        border_radius=8,
-                        padding=20,
-                        alignment=ft.Alignment(0, 0),
-                        content=ft.Column(
-                            [
-                                ft.Icon(ft.Icons.PLAY_CIRCLE, size=48, color=GOLD),
-                                ft.Text("Individual Contribution Video", size=19, weight=ft.FontWeight.BOLD, color=WHITE, text_align=ft.TextAlign.CENTER),
-                                ft.Text(
-                                    "Video evidence section prepared for the final 1 minute 30 second contribution recording.",
-                                    size=15,
-                                    color="#EAF2FF",
-                                    text_align=ft.TextAlign.CENTER,
-                                ),
-                            ],
-                            spacing=10,
-                            tight=True,
-                            horizontal_alignment=ft.CrossAxisAlignment.CENTER,
-                        ),
-                    ),
+                    contribution_video_card(page),
                 ],
                 spacing=18,
                 run_spacing=18,
@@ -595,7 +641,7 @@ def main(page: ft.Page):
             hero(page, logo_src),
             about_section(),
             project_section(),
-            contribution_section(),
+            contribution_section(page),
             evidence_section(),
             cert_section,
             learning_section(),
